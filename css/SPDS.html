@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)http://localhost/project/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="icon" type="image/png" href="./SPDS_files/logo.jpg">
+  <title>SPDS</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./SPDS_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./SPDS_files/bootstrap.min(1).css">
+  <script src="./SPDS_files/jquery.min.js.download"></script>
+   <!-- <script src="cookie.jquery.json"></script> -->
+  <script src="./SPDS_files/bootstrap.min.js.download"></script>
+  <style>
+    /* Set height of the grid so   .sidenav can be 100% (adjust if needed) */
+    
+    .row.content {
+        height: 100vh;
+
+
+    }
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color:#9fbdf5;
+      color: white;
+      display:none;
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      height: 200px;
+      width: 100%;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+  <script>
+    function footerAlign() {
+          $('.footer').css('display', 'block');
+          $('.footer').css('height', '50px');
+          var footerHeight = $('footer').outerHeight();
+          $('body').css('padding-bottom', footerHeight);
+          $('.footer').css('height', footerHeight);
+        }
+      $(document).ready(function(){
+        footerAlign();
+      });
+      $( window ).resize(function() {
+        footerAlign();
+      });
+  </script>
+</head>
+<body style="padding-bottom: 50px;">
+
+<div class="container-fluid">
+<div class="row content"> 
+
+    <div class="col-sm-3 sidenav">
+          <a href="http://www.aau.in/"><img src="./SPDS_files/logo.jpg" style="width:20%;"></a><br>
+          <h3><b>SPDS</b></h3>
+          <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="http://localhost/project/index.php">Home</a></li>
+              <li><a href="http://localhost/project/#section2">About</a></li>
+              <li><a href="http://localhost/project/#section3">Contact us</a></li>
+          </ul><br>
+    </div>
+    <div class="col-sm-9">
+          <h1><b>Student Project Distribution System</b></h1>
+    </div>
+     <div class="collapse navbar-collapse col-sm-9" id="myNavbar">
+          <ul class="nav navbar-nav">
+             <li><a href="http://localhost/project/">Project</a></li> <li><a href="http://localhost/project/guides.php">Guides</a></li>            <!-- <li><a href="#">Projects</a></li> -->
+            <!-- <li><a href="#">Contact</a></li> -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="http://localhost/project/#"> Login <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="http://localhost/project/pmlogin.php">Project Manager and Clerk</a></li>
+                  <li><a href="http://localhost/project/studentlogin.php">Student</a></li>
+                  <li><a href="http://localhost/project/facultylogin.php">Faculty</a></li>
+                </ul></li>
+                        </ul>
+          
+          
+          
+     </div><div class="col-sm-9">
+		 
+		<div class="container col-sm-6" style="width:auto; border:1px solid #ccc;">  
+                <br>  
+                       <p class="bg-primary text-white">Project Submission Schedule</p>  
+                <marquee behavior="scroll" direction="up" onmouseover="this.stop();" onmouseout="this.start();">  
+                <b>Title Submission Date is : 11-07-2019 </b><br><table class="table table-bordered"><tbody><tr></tr></tbody></table><b>Synopsis Submission Date is : 26-07-2019 </b><br><table class="table table-bordered"><tbody><tr></tr></tbody></table><b>Report Submission Date is : 28-11-2019 </b><br><table class="table table-bordered"><tbody><tr></tr></tbody></table><b>Project Presentation Date is : 05-12-2019 </b><br><table class="table table-bordered"><tbody><tr></tr></tbody></table>  
+                </marquee>  
+                <br>                 
+           </div>  
+		<div class="container col-sm-6">
+			<img src="./SPDS_files/cait.jpg" style="margin-left:100px; margin-right:50px;width:100%;">
+		</div>
+    <br>
+    <div class="container col-sm-12">
+      <br>
+    <p align="justify"><b>College of Agricultural Information Technology</b> was established in the year 2009 under the aegis of Anand Agricultural University. The CAIT offers 4-yrs B.Tech. (AIT) and 2-yrs M.Tech. (AIT) programs. The postgraduate master degree program is not offered anywhere in India except by Anand Agricultural University. The college aims to cater to the upcoming demands of the Agrarian Economy by generation of a young workforce skilled with knowhow of future ready Information and Communication Technology and imparting the same in Agricultural sector. The college has trained teaching faculty with a balanced blend of well-experienced seniors and energetic youth focused towards Teaching and Research. The College building is surrounded by lush green natural environment with enough resources such as well-ventilated lecture halls with audio visual facility, computer labs, scientific equipments, Wi-Fi Internet access, library, NCC/NSS, sports, project and placement cell etc. The curriculum of B.Tech. (AIT) is a blend of Agricultural Science and Information and Communication Technology (ICT) to harvest the potential of both the sectors. And we are looking forward to introduce innovative practices of automation and information mitigation by means of ICT in the sparsely charted agriculture and allied sectors to bridge the gap between the skills of the technocrat and the farmer.</p></div>
+</div> 
+
+		<footer class="footer col-sm-12" style="display: block; height: 50px;">
+		  <p style="text-align: center;font-size:100% font-color:black;">Developed by CAIT</p>
+		</footer>
+	</div>
+
+</div>
+
+
+</body></html>
