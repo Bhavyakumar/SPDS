@@ -1,19 +1,27 @@
 <?php
 	include 'webpage_header.php';
+  include 'connection.php';
 ?>
 <div class="col-sm-12">
-		<?php
-		 
-				include 'connection.php';
-				$sql = "SELECT * FROM activity";
-				$result = mysqli_query($con, $sql);
-        $row = mysqli_fetch_array($result)
-		?> 
 		<div class="container col-sm-7" style="width:auto; border:1px solid #ccc;">  
                 <br />  
                 <p class="bg-primary text-white" style="background-color: red; ">Notice: </p>
-                <marquee behavior="scroll" direction="up" onmouseover="this.stop();" onmouseout="this.start();">  
-                  <p class="bg-primary text-white">Project Submission Schedule for<?php ?></p>  
+                  <marquee behavior="scroll" height=200px  direction="up" onmouseover="this.stop();" onmouseout="this.start();" > 
+                  
+                 <?php
+                      $qr=mysqli_query($con,"select * from semester");
+                      while($rs=mysqli_fetch_assoc($qr))
+                      {
+                          $sid=$rs['sem_id'];
+                           $sem=$rs['semester'];
+                 
+                      include 'connection.php';
+                      $sql ="SELECT * from activity INNER JOIN semester ON semester.sem_id=activity.sem_id WHERE semester.sem_id='".$sid."'";
+                      $result = mysqli_query($con, $sql);
+                     
+                  ?> 
+              
+                  <p class="bg-primary text-white">Project Submission Schedule for Semester: <?php echo $sem;?></p>  
                 <?php  
                      if(mysqli_num_rows($result) > 0)  
                      {  
@@ -27,9 +35,12 @@
                           }  
                      }  
                 ?>  
-                </marquee>  
-                <br />                 
+                
+                <br />   
+                 <?php }?>   
+                 </marquee>             
            </div>  
+       
 		<div class='container col-sm-5'>
 			<img src="image/cait.jpg" style="margin-left:100px; margin-right:50px;width:100%;">
 		</div>

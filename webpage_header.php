@@ -11,7 +11,14 @@
   
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
-  
+  <script>
+    $(document).ready(function(){
+      $('#submit').on('click',function(){
+          $('.sidenav').width('100px');
+      });
+
+    });
+  </script>
   <style>
     /* Set height of the grid so   .sidenav can be 100% (adjust if needed) */
     
@@ -28,7 +35,7 @@
       background-color:#FFFFFF;
       color: black;
       display:none;
-      /*position: absolute;*/
+      position: absolute;
       left: 1px;
       bottom: 1px;
       height: 200px;
@@ -70,7 +77,8 @@
 <div class="row content"> 
 
     <div class="col-sm-2 sidenav">
-          <a href="http://www.aau.in"><img src="image/logo.jpg" style="width:30%;"></a><br>
+          <a href="http://www.aau.in"><img src="image/logo.jpg" style="width:40%;"></a>
+          <!-- <div style="margin-left: 150px;"><button type="submit" id="submit"><i class="glyphicon glyphicon-menu-hamburger"></i></button></div> --><br>
           <h3><b>SPDS</b></h3>
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="index.php">Dashboard</a></li>

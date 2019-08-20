@@ -109,19 +109,19 @@ if($_SESSION['type']=='Minor')
         
         <!-- Modal body -->
         <div class="modal-body">
-        	<form action='minor_remark.php' method='POST'>
+        	<form action='minor_remark.php' method='GET'>
 	           <div class="form-group">
 						  <label for="remark" class="col-form-label">Remark :</label>
 						  <textarea class="form-control" id="remark" name="remark"></textarea>
 						 
 		      	</div>
-		      	 <input type="text" class="form-control" id="reg" name="reg">
+		      			 <input type="text" class="form-control" id="reg" name="reg">
 						  <input type="text" class="form-control" id="sub" name="sub">
        </div>
         
         <!-- Modal footer -->
 		        <div class="modal-footer">
-		        	<button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>		
+		        	<input type="submit" class="btn btn-primary" name="submit" value="Submit"></button>		
 		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		        </div>
    		 </form>
