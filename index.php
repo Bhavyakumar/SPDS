@@ -41,8 +41,8 @@
                  </marquee>             
            </div>  
        
-		<div class='container col-sm-5'>
-			<img src="image/cait.jpg" style="margin-left:100px; margin-right:50px;width:100%;">
+		<div class='container col-sm-6'>
+			<img src="image/cait.jpg" style="margin-left:50px;width:110%;">
 		</div>
     <br>
     <div class="container col-sm-12">

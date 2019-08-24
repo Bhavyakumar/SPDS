@@ -1,4 +1,4 @@
-
+      
 <?php
   include 'webpage_header.php';
     include 'connection.php';
@@ -70,7 +70,7 @@
 					echo'	<label for="fpwd">Password</label>';
 					echo'<div class="input-group">';
 					  echo'<input type="password" class="form-control" id="password" name="password" value="'.$pwd.'" aria-label="Amount (rounded to the nearest dollar)" placeholder="Enter Password">
-							<span class="input-group-addon"><button type="button" class="btn btn-primary btn-xs	" id="show">Show </span></button>
+							<span class="input-group-addon"><button type="button" class="btn btn-xs	" id="show"><span class="glyphicon glyphicon-eye-open"></span> </span></button>
 					  </div><br>';
 					  
 					  echo'<button type="submit" name="studsubmit" id="studsubmit" class="btn btn-primary">Submit</button>';
@@ -135,7 +135,7 @@
 				 echo'	<label for="fpwd">Password</label>';
 				  echo'<div class="input-group">
 						<input type="password" class="form-control" id="password" value="'.$pwd.'" aria-label="Amount (rounded to the nearest dollar)" placeholder="Enter Password" name="password">
-							<span class="input-group-addon"><button type="button" class="btn btn-primary btn-xs	" id="show">Show </span></button>
+							<span class="input-group-addon "><button type="button" class="btn btn-xs" id="show"> <span class="glyphicon glyphicon-eye-open"></span></span></button>
 						</div><br>';
 				  // echo'<div class="form-group">
 				  //   <label for="fpwd">Password</label>
@@ -161,12 +161,12 @@
 			   if(pwdtype == 'password')  
 			   {  
 			    pwdfield.attr('type', 'text');  
-			    $(this).text('Hide');  
+			    $(this).html('<span class="glyphicon glyphicon-eye-close"></span>');  
 			   }  
 			   else  
 			   {  
 			    pwdfield.attr('type', 'password');  
-			     $(this).text('Show');  
+			     $(this).html('<span class="glyphicon glyphicon-eye-open"></span>');  
 			   }
 			  }
 			  else

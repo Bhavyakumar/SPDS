@@ -11,21 +11,22 @@
   
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
-  <script>
+  <!-- <script>
     $(document).ready(function(){
       $('#submit').on('click',function(){
           $('.sidenav').width('100px');
       });
 
     });
-  </script>
+  </script> -->
   <style>
     /* Set height of the grid so   .sidenav can be 100% (adjust if needed) */
     
     /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100vh;
+    .sidenav:hover {
+      /*background-color: #f1f1f1;*/
+      /*height: 100vh;*/
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
 
     }
@@ -77,11 +78,19 @@
 <div class="row content"> 
 
     <div class="col-sm-2 sidenav">
-          <a href="http://www.aau.in"><img src="image/logo.jpg" style="width:40%;"></a>
-          <!-- <div style="margin-left: 150px;"><button type="submit" id="submit"><i class="glyphicon glyphicon-menu-hamburger"></i></button></div> --><br>
-          <h3><b>SPDS</b></h3>
+          <a href="http://www.aau.in"><img src="image/logo.jpg" style="width:40%;"></a><h3><b>SPDS</b></h3>
+          <!-- <div style="margin-left: 150px;"><button type="submit" id="submit"><i class="glyphicon glyphicon-menu-hamburger"></i></button></div> -->
+          
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="index.php">Dashboard</a></li>
+            <?php
+             session_start();
+                  if(isset($_SESSION['type']))
+                  {
+                     echo "<li><a href='fac_mark.php'>Mark</a></li>";
+                  }
+            ?>
+             
               <li><a href="#section2">About</a></li>
               <li><a href="#section3">Contact us</a></li>
           </ul><br>
@@ -89,10 +98,10 @@
     <div class="col-sm-10" style="background-color: #f1f1f1; height: 50px;">
           <h2><b>Student Project Distribution System</b></h2>
     </div>
-     <div class="collapse navbar-collapse col-sm-10" id="myNavbar" >
+     <div class="collapse navbar-collapse col-sm-10" id="myNavbar">
           <ul class="nav navbar-nav">
             <?php
-            session_start();
+           
                 if(isset($_SESSION['type']))
                 {
                     echo "<li><a href='fetch_title.php'>Title</a></li>";

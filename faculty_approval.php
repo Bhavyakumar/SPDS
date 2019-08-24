@@ -7,13 +7,13 @@
 
 				echo"<div class='container-fluid col-sm-12 '>";
 
-				$qr="select * from  faculty where f_status=0";
+				$qr="select * from  faculty inner join department on department.d_id=faculty.d_id where f_status=0";
 				$qry=mysqli_query($con,$qr);
 				if(mysqli_num_rows($qry) > 0){
 				$count=0;
 				echo "";
 				echo"<table class='table table-bordered'>";		
-				echo"<thead style='background-color:#0b76e0;color:#ffffff;'><tr><th>Sr. no.</th><th>Faculty Name</th><th>Email</th><th>Mobile No.</th><th>Guide Type</th><th></th><th></th></tr></thead><tbody>";
+				echo"<thead style='background-color:#0b76e0;color:#ffffff;'><tr><th>Sr. no.</th><th>Faculty Name</th><th>Department</th><th>Email</th><th>Mobile No.</th><th>Guide Type</th><th></th><th></th></tr></thead><tbody>";
 		
 		   while($ar=mysqli_fetch_assoc($qry))
 			  {
@@ -22,6 +22,7 @@
 				echo"<td>".$count."</td>";
 				//echo"<td>".$ar["type_id"]."</td>";
 				echo"<td>".$ar["name"]."</td>";
+				echo"<td>".$ar["department"]."</td>";
 				echo"<td>".$ar["email"]."</td>";
 				echo"<td>".$ar["phone_no"]."</td>";
 				echo "<td>";

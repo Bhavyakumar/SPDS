@@ -46,7 +46,7 @@
     {
          if(mysqli_num_rows($result) > 0)
          {
-               echo "<table border=1 class='table table-bordered'>";
+               echo "<table border=1 class='table table-striped table-bordered'>";
                      echo "<tr>";
                         echo "<th>Sr No.</th>";
                         echo "<th>Department name</th>";

@@ -1,20 +1,16 @@
 <?php
-	session_start();
-	include "connection.php";
-	if(isset($_POST['submit'])) 
-	{
-				$reg=$_POST["reg"];
-				$fid=$_SESSION['fid'];
-				$subid=$_POST['sub'];	
-				$remark=$_POST['remark']; 
-				if($_SESSION['type']=="Minor")
-				{
-						$query="SELECT * from remark where sub_id=".$subid;
-						// echo $query;
+include "connection.php";
+session_start();
+			$reg=$_POST["regno"];
+			$subid=$_POST["subid"];
+			$fid=$_SESSION["fid"];
+			$remark=$_POST["majremark"];
+						$query="SELECT * from remark where sub_id='".$subid."' and f_id='".$fid."'";
+						 echo $query;
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>=1)
 						{
-							$rem="update remark set sy_remark='".$remark."' where sub_id='".$subid."' and status=0";
+							$rem="update remark set sy_remark='".$remark."' where sub_id='".$subid."' and status=1	";
 							$uprem=mysqli_query($con,$rem);
 							if($uprem)
 							{
@@ -27,7 +23,7 @@
 						}
 						else
 						{
-							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id) values ('$reg','$fid','$remark','$subid')";
+							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id,status) values ('$reg','$fid','$remark','$subid',1)";
 							echo "$qry";
 							$rs=mysqli_query($con,$qry);
 							if($rs)
@@ -38,9 +34,5 @@
 							{
 								header('location:fetch_synopsis.php?arr');
 							}
-						}
-				}
-	}
-	
-
+						}	
 ?>

@@ -75,8 +75,16 @@ if($_SESSION['type']=='Minor')
 				}
 					$arr[$i]=$row['reg_no'];
 					$i++;
+					if($row['t_status']=='1')
+					{
+						echo "<td>".$row['title']."</td>";
+						echo "<td>".$row['title_decscription']."</td></tr>";
+					}
+					else
+					{
 					echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input' value='".$row['t_id']."'>".$row['title']."</td>";
 					echo "<td>".$row['title_decscription']."</td></tr>";
+					}	
 			}
 				
 			echo "</table>";
@@ -127,7 +135,7 @@ if($_SESSION['type']=='Major')
 
 					if($row['t_status']=='2')
 					{
-					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span></mark></td>";
+					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span>	</mark></td>";
 					}
 					else{
 						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
