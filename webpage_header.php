@@ -7,10 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
   <script src="css/jquery.min.js"></script>
   
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
+
   <!-- <script>
     $(document).ready(function(){
       $('#submit').on('click',function(){
@@ -70,6 +72,7 @@
       $( window ).resize(function() {
         footerAlign();
       });
+      
   </script>
 </head>
 <body>
@@ -89,10 +92,16 @@
                   {
                      echo "<li><a href='fac_mark.php'>Mark</a></li>";
                   }
+                   if(isset($_SESSION['stud']))
+                  {
+                      echo "<li><a href='fetch_result.php'>Result</a></li>";
+                     echo "<li><a href='project_uploadation.php'>Project Uploadation(RAR File)</a></li>";
+                  }
+                  
             ?>
              
               <li><a href="#section2">About</a></li>
-              <li><a href="#section3">Contact us</a></li>
+              <li><a href="contactus.php">Contact us</a></li>
           </ul><br>
     </div>
     <div class="col-sm-10" style="background-color: #f1f1f1; height: 50px;">
@@ -108,7 +117,7 @@
                     echo '<li class="dropdown"><a class="dropdown-toggle"  data-toggle="dropdown" href="#"> Submission <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                               <li><a href="fetch_synopsis.php">Synopsis</a></li>
-                              <li><a href="fetch_report.php">Report</a></li>
+                             <li><a href="fetch_report.php">Report</a></li>
                         </ul></li>';
                 }
                 if(isset($_SESSION['pm']))
@@ -124,13 +133,14 @@
                 }
                 else
                 {
-                   echo " <li><a href=''>Project</a></li>";
+                   echo " <li><a href='project.php'>Projects</a></li>";
                    echo " <li><a href='guides.php'>Guides</a></li>";
                 }
                 if(isset($_SESSION['stud']))
                 {
                   echo "<li><a href='titlesub.php'>Title</a></li>";
                   echo "<li><a href='stud_synopsis.php'>Submission</a></li>";
+                  // echo "<li><span class='glyphicon glyphicon-bell' style='font-size:24px'></li>";
                         
 
                 }  
@@ -141,7 +151,7 @@
           <ul class="nav navbar-nav navbar-right">
             <?php
             
-            if(isset($_SESSION['pm']) || isset($_SESSION['stud']) || isset($_SESSION['fac']) || isset($_SESSION['clerk']))
+            if(isset($_SESSION['pm']) || isset($_SESSION['stud']) || isset($_SESSION['type']) || isset($_SESSION['clerk']))
             {
                  echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class=" glyphicon glyphicon-cog" style="font-size:24px"></i><span class="caret">';
                   echo '<ul class="dropdown-menu">';

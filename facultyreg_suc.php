@@ -6,7 +6,7 @@
 	$dept=$_POST['dept'];
 	$femail=$_POST['femail'];
 	$fpwd=$_POST['fpwd'];
-	$qry= "insert into faculty (name,email,phone_no,password,d_id) values ('$fname','$femail','$fphone','$fpwd','$dept')";
+	$qry= "insert into faculty (fname,email,phone_no,password,d_id) values ('$fname','$femail','$fphone','$fpwd','$dept')";
 	//echo "$qry";
 	$rs=mysqli_query($con,$qry);
 	if($rs)

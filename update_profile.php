@@ -78,7 +78,7 @@
 				echo'</div>';
 
   }
- if(isset($_SESSION['fac'])) 
+ if(isset($_SESSION['type'])) 
  {
  		$query="SELECT * FROM faculty INNER JOIN department ON department.d_id=faculty.d_id where f_id='".$_SESSION['fid']."'";
  		// echo $query;
@@ -86,7 +86,7 @@
   		while($rw=mysqli_fetch_assoc($re))
   		{
   				// $reg=$rw['reg_no'];
-				$name=$rw['name'];
+				$name=$rw['fname'];
 				$did=$rw['d_id'];
 				$dept=$rw['department'];
 				$email=$rw['email'];

@@ -32,7 +32,7 @@ $sem_id=$_GET['sid'];
                     echo "<option value=''>Select Major Guide</option>";
                 while($maj=mysqli_fetch_assoc($rs))
                 {
-                       echo "<option value='".$maj['f_id']."'>".$maj['name']."</option>";
+                       echo "<option value='".$maj['f_id']."'>".$maj['fname']."</option>";
                 }
                      echo "</select>";
                 echo"</td>";    
@@ -43,7 +43,7 @@ $sem_id=$_GET['sid'];
                     echo "<option value=''>Select Minor Guide</option>";
                 while($min=mysqli_fetch_assoc($rs))
                 {
-                       echo "<option value='".$min['f_id']."'>".$min['name']."</option>";
+                       echo "<option value='".$min['f_id']."'>".$min['fname']."</option>";
                 }
                      echo "</select>";
                 echo"</td>";

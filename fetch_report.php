@@ -55,7 +55,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Report(Download)</th>";
 							echo "<th>Remarks</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' AND report_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -83,7 +83,7 @@ if($_SESSION['type']=='Minor')
 					$arr[$i]=$row['reg_no'];
 					$i++;
 					echo "<td>".$row['title']."</td>";
-					echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
+					echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 
 					 echo "<td><button class='btn submitButtonremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#remark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
 
@@ -200,7 +200,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Remarks</th>";
 							echo "<th>Finalization of Report</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' AND report_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -235,16 +235,16 @@ if($_SESSION['type']=='Major')
 					$result=mysqli_num_rows($re);
 
 						if($result==0){
-							echo "<td align='center'>-</td>";
+							echo "<td align='center'>--</td>";
 						}
 						else{	
 							echo "<td>".$rw['re_remark']."</td>";
 						}
-					echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style=' color:green'><button class='btn' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
+					echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style=' color:green'><button class='btn' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 					
 					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span>Remarks</button></td>";
 			// 		echo "<td><button  type='submit' id='submit' name='download' class='btn btn-primary'><span class='glyphicon glyphicon-download-alt'></span>	</button></td>";
-					echo "<td align='center'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></td>";
+					echo "<td align='center'><a href='re_finalize.php?id=".$row["sub_id"]."' style=' color:green'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></a></td>";
 			 }
 				
 			echo "</table>";

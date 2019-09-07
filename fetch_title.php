@@ -5,7 +5,9 @@
 ?>
 <form action="fetch_title.php" method="POST">
 <div class="col-sm-12">
-	<br>
+		<div class="panel-heading">
+			<div class="panel-title"><h3>Titles</h3></div>
+	   </div>
 <div class="form-group col-sm-3">
       <label for="semester">Semester</label>
       <select id="sem" name="sem" class="form-control" required>

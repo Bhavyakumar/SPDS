@@ -5,7 +5,7 @@
 
 <script>
 $(document).ready(function(){
-	$('.toast').fadeOut(10000);
+	// $('.toast').fadeOut(10000);
   	$('#sub').click(function(){
   		$('.toast').hide();
 
@@ -21,24 +21,28 @@ $(document).ready(function(){
     <div>
     			  
     			   <?php
-    			   		$sql="SELECT name FROM major_guide INNER JOIN faculty ON major_guide.f_id = faculty.f_id where reg_no='".$_SESSION['reg']."'";
+    			   		$sql="SELECT fname FROM major_guide INNER JOIN faculty ON major_guide.f_id = faculty.f_id where reg_no='".$_SESSION['reg']."'";
     			   		$rs=mysqli_query($con,$sql);
     			   		while($row=mysqli_fetch_assoc($rs))
     			   		{
-    			   			echo "<p class='bg-info text-white' style='width:40%'>Major Guide: ".$row['name']."</p>";
+    			   			echo "<p class='bg-info text-white' style='width:40%'>Major Guide: ".$row['fname']."</p>";
     			   		}	
-    			   		$qr="SELECT name FROM minor_guide INNER JOIN faculty ON minor_guide.f_id = faculty.f_id where reg_no='".$_SESSION['reg']."'";
+    			   		$qr="SELECT fname FROM minor_guide INNER JOIN faculty ON minor_guide.f_id = faculty.f_id where reg_no='".$_SESSION['reg']."'";
     			   		$result=mysqli_query($con,$qr);
     			   		while($tt=mysqli_fetch_assoc($result))
     			   		{
-    			   			echo " <p class='bg-info text-white ' style='width:40%'>Major Guide: ".$tt['name']."</p>";
+    			   			echo " <p class='bg-info text-white ' style='width:40%'>Major Guide: ".$tt['fname']."</p>";
     			   		}
     			   ?>
     </div><br>
 	<?php	
 	 if(isset($_GET['err']))
 	 {
-			echo "<div class='alert alert-success' role='alert'>Successfully Submitted Title!</div>";
+			echo "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>Successfully Submitted Title!</div>";
+	 }
+	 if(isset($_GET['arr']))
+	 {
+			echo "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>Guide Allocation is not Done!</div>";
 	 }
 	?>
 	

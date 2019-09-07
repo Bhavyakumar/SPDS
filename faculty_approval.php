@@ -21,7 +21,7 @@
 				echo"<form action='approve.php' method=POST><tr>";
 				echo"<td>".$count."</td>";
 				//echo"<td>".$ar["type_id"]."</td>";
-				echo"<td>".$ar["name"]."</td>";
+				echo"<td>".$ar["fname"]."</td>";
 				echo"<td>".$ar["department"]."</td>";
 				echo"<td>".$ar["email"]."</td>";
 				echo"<td>".$ar["phone_no"]."</td>";
@@ -53,7 +53,7 @@
 			}
 			else
 			{
-				echo  "<div class='alert alert-success' role='alert'>No Faculty is registered.</div>";
+				echo  "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>No Faculty is registered.</div>";
 			}
 			echo"</div>";
 

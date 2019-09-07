@@ -35,7 +35,7 @@ if(isset($_POST['facsubmit']))
 
 	// echo $drop;
 	// echo $hid;
-	$qry="update faculty set name='".$fname."',phone_no='".$fphone."',email='".$femail."',password='".$password."',d_id='".$dept."' where f_id='".$_SESSION['fid']."'";
+	$qry="update faculty set fname='".$fname."',phone_no='".$fphone."',email='".$femail."',password='".$password."',d_id='".$dept."' where f_id='".$_SESSION['fid']."'";
 	// echo $qry;
 		if( $rs= mysqli_query($con,$qry))
 	    {

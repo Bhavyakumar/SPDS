@@ -16,7 +16,7 @@ if(isset($_SESSION['stud']))
 	unset($_SESSION["reg"]);
 	header('location:studentlogin.php');
 }
-if(isset($_SESSION['fac']))
+if(isset($_SESSION['type']))
 {
 	unset($_SESSION["fac"]);
 	unset($_SESSION["fid"]);

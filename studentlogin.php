@@ -54,8 +54,6 @@
                   </div>         
                </div>                     
     </div>  
-
- 
 <?php
     include 'webpage_footer.php';
 ?>

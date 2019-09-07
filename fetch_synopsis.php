@@ -57,7 +57,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Synopsis(Download)</th>";
 							echo "<th>Remarks</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."'  AND sy_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -203,7 +203,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Finalization of Synopsis</th>";
 
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' AND sy_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -238,7 +238,7 @@ if($_SESSION['type']=='Major')
 					$result=mysqli_num_rows($re);
 
 						if($result==0){
-							echo "<td align='center'>-</td>";
+							echo "<td align='center'>--</td>";
 						}
 						else{	
 							echo "<td>".$rw['sy_remark']."</td>";
@@ -247,7 +247,7 @@ if($_SESSION['type']=='Major')
 					
 					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
 			// 		echo "<td><button  type='submit' id='submit' name='download' class='btn btn-primary'><span class='glyphicon glyphicon-download-alt'></span>	</button></td>";
-					echo "<td align='center'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></td>";
+					echo "<td align='center'><a href='sy_finalize.php?id=".$row["sub_id"]."' style=' color:green'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></a></td>";
 			 }
 				
 			echo "</table>";
