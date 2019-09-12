@@ -105,7 +105,7 @@
           </ul><br>
     </div>
     <div class="col-sm-10" style="background-color: #f1f1f1; height: 50px;">
-          <h2><b>Student Project Distribution System</b></h2>
+           <h2><b>Student Project Distribution System</b></h2>
     </div>
      <div class="collapse navbar-collapse col-sm-10" id="myNavbar">
           <ul class="nav navbar-nav">

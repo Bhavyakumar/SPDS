@@ -66,7 +66,40 @@ $(document).ready(function(){
 	
 	</form>
 	<?php
-			// echo "<span style='font-weight:bold;color:red'>Final Title :</span>";
+			$query="SELECT * FROM title where t_status=0 or t_status=2";
+			$abc= mysqli_query($con,$query);
+			if(mysqli_num_rows($abc))
+			{
+							$qry="SELECT * FROM title";
+							$result=mysqli_query($con,$qry);
+
+							echo "<table class='table table-striped table-bordered'>";
+								echo "<tbody>";
+									echo "<tr>";
+										echo "<th>Sr. no.</th>";
+										// echo "<th>Reg_no</th>";
+										echo "<th>Title</th>";
+										echo "<th>Title Description</th>";
+										echo "<th>Submit Date</th>";
+										echo "<th></th>";
+									echo "</tr>";
+								$i=1;
+								while($row=mysqli_fetch_assoc($result))
+								{
+									echo "<tr>";
+									echo "<td>".$i++."</td>";
+									// echo "<td>".$row['reg_no']."</td>";
+									echo "<td>".$row['title']."</td>";
+									echo "<td>".$row['title_decscription']."</td>";
+									echo "<td>".$row['t_submit_date']."</td>";
+									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
+									echo "</tr>";
+								}
+								echo "</table>";
+				}
+				else
+				{
+							// echo "<span style='font-weight:bold;color:red'>Final Title :</span>";
 							$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no where t_status=1 and student.reg_no='".$_SESSION['reg']."'";
 							// echo $sql;
 							$res=mysqli_query($con,$sql);
@@ -89,8 +122,12 @@ $(document).ready(function(){
 							        echo "</div>";
 							}
 						echo "</div>";
+				}
+							
 	?>
+
 </div>
+
 <script>
 	$(document).ready(function(){
 		var i=1;

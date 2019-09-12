@@ -166,7 +166,87 @@ include 'webpage_header.php';
 		                		echo "</tr>";	
 		                }
 		        echo "</table>";
-		    		
+		   	$query="SELECT * FROM submission where sy_status=0";
+			$abc= mysqli_query($con,$query);
+			if(mysqli_num_rows($abc))
+			{
+							echo "<div class='panel-heading'>
+						        <div class='panel-title'><h4><b>Synopsis</b></h4></div>
+						    </div>";
+							$qry="SELECT * FROM submission";
+							$result=mysqli_query($con,$qry);
+							echo "<table class='table table-striped table-bordered'>";
+								echo "<tbody>";
+									echo "<tr>";
+										echo "<th>Sr. no.</th>";
+										// echo "<th>Reg_no</th>";
+										echo "<th>Submit Date</th>";
+										echo "<th>Synopsis(File Name)</th>";
+										echo "<th>Synopsis(Download)</th>";
+										// echo "<th>Title Description</th>";
+										echo "<th></th>";
+									echo "</tr>";
+								$i=1;
+								while($row=mysqli_fetch_assoc($result))
+								{
+									echo "<tr>";
+									echo "<td>".$i++."</td>";
+									// echo "<td>".$row['reg_no']."</td>";
+									$original=$row['synopsis_date'];
+									$newDate = date("d-m-Y", strtotime($original));
+									echo "<td>".$newDate."</td>";
+									$sy=substr($row['synopsis'],19);
+									// echo $sy;
+									// echo "<td>".$row['synopsis_date']."</td>";
+									echo "<td>".$sy."</td>";
+									echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
+									// echo "<td>".$row['t_submit_date']."</td>";
+									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
+									echo "</tr>";
+								}
+								echo "</table>";
+			}
+			$query="SELECT * FROM submission where report_status=0";
+			$abc= mysqli_query($con,$query);
+			if(mysqli_num_rows($abc))
+			{
+				echo "<div class='panel-heading'>
+						        <div class='panel-title'><h4><b>Report</b></h4></div>
+						    </div>";
+							$qry="SELECT * FROM submission";
+							$result=mysqli_query($con,$qry);
+							echo "<table class='table table-striped table-bordered'>";
+								echo "<tbody>";
+									echo "<tr>";
+										echo "<th>Sr. no.</th>";
+										// echo "<th>Reg_no</th>";
+										echo "<th>Submit Date</th>";
+										echo "<th>Report(File Name)</th>";
+										echo "<th>Report(Download)</th>";
+										// echo "<th>Title Description</th>";
+										echo "<th></th>";
+									echo "</tr>";
+								$i=1;
+								while($row=mysqli_fetch_assoc($result))
+								{
+									echo "<tr>";
+									echo "<td>".$i++."</td>";
+									// echo "<td>".$row['reg_no']."</td>";
+									$original=$row['report_date'];
+									$newDate = date("d-m-Y", strtotime($original));
+									echo "<td>".$newDate."</td>";
+									$re=substr($row['report'],17);
+									// echo $sy;
+									// echo "<td>".$row['synopsis_date']."</td>";
+									echo "<td>".$re."</td>";
+									echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
+									// echo "<td>".$row['t_submit_date']."</td>";
+									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
+									echo "</tr>";
+								}
+								echo "</table>";
+			}
+
     ?>
 </div>
 <?php

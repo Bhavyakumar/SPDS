@@ -18,6 +18,8 @@ if(isset($_POST['submit']))
 		$qry="insert into submission(reg_no,t_id,synopsis,synopsis_date) values ('$reg','$tid','$location','$sydate')";
 		//echo $qry;
 		mysqli_query($con,$qry);
+		 $last_id = $con->insert_id;
+		 setcookie("subid",$last_id);
 		header('Location:stud_synopsis.php?err');
 	}
 	else

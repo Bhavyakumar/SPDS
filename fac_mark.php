@@ -58,7 +58,7 @@ if(isset($_POST['submit']))
 							echo "<th></th>";
 						echo "</tr>";
 
-				$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.reg_no=submission.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='$sem' order by student.reg_no";
+				$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.reg_no=submission.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='$sem' AND report_status=1 order by student.reg_no";
 			    // echo $sql;
 				$rs= mysqli_query($con,$sql);
 				while($row=mysqli_fetch_assoc($rs))

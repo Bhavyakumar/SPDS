@@ -42,6 +42,7 @@ if($_SESSION['type']=='Minor')
 	{	
 		echo "<div class='col-sm-12'>";
 			$sem=$_POST['sem'];
+				echo "<span style='font-weight:bold;color:red'>Note: Highlighted title suggested by minor guide.</span>";
 			echo "<form action='minor_selecttitle.php' method='POST'>";
 			// $sem_name=$_POST['hidden'];
 			// echo $sem;
@@ -77,16 +78,20 @@ if($_SESSION['type']=='Minor')
 				}
 					$arr[$i]=$row['reg_no'];
 					$i++;
-					if($row['t_status']=='1')
+					if($row['t_status']=='2')
 					{
-						echo "<td>".$row['title']."</td>";
-						echo "<td>".$row['title_decscription']."</td></tr>";
+					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span>	</mark></td>";
 					}
 					else
 					{
-					echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input' value='".$row['t_id']."'>".$row['title']."</td>";
+						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+					}
+					// else
+					// {
+					// echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input' value='".$row['t_id']."'>".$row['title']."</td>";
+					// echo "<td>".$row['title_decscription']."</td></tr>";
+					// }	
 					echo "<td>".$row['title_decscription']."</td></tr>";
-					}	
 			}
 				
 			echo "</table>";
