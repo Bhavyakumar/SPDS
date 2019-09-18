@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="image/logo.jpg">
-  <title>SPDS</title>
+  <title> Welcome to SPDS</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -123,7 +123,12 @@
                 if(isset($_SESSION['pm']))
                 {
                   echo "<li><a href='faculty_approval.php'>Faculty approval</a></li>";
-                  echo "<li><a href='guide_allocation.php'>Guide Allocation</a></li>";
+                  // echo "<li><a href='guide_allocation.php'>Guide Allocation</a></li>";
+                   echo '<li class="dropdown"><a class="dropdown-toggle"  data-toggle="dropdown" href="#"> Guide Allocation<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                              <li><a href="guide_allocation.php">Allocate Guides</a></li>
+                             <li><a href="update_guides.php">Update Guides</a></li>
+                        </ul></li>';
                 }  
 
                 if(isset($_SESSION['clerk']))

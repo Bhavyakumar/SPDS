@@ -166,14 +166,14 @@ include 'webpage_header.php';
 		                		echo "</tr>";	
 		                }
 		        echo "</table>";
-		   	$query="SELECT * FROM submission where sy_status=0";
+		   	$query="SELECT * FROM submission where sy_status=0 ";
 			$abc= mysqli_query($con,$query);
 			if(mysqli_num_rows($abc))
 			{
 							echo "<div class='panel-heading'>
 						        <div class='panel-title'><h4><b>Synopsis</b></h4></div>
 						    </div>";
-							$qry="SELECT * FROM submission";
+							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."'";
 							$result=mysqli_query($con,$qry);
 							echo "<table class='table table-striped table-bordered'>";
 								echo "<tbody>";
@@ -184,7 +184,7 @@ include 'webpage_header.php';
 										echo "<th>Synopsis(File Name)</th>";
 										echo "<th>Synopsis(Download)</th>";
 										// echo "<th>Title Description</th>";
-										echo "<th></th>";
+										// echo "<th></th>";
 									echo "</tr>";
 								$i=1;
 								while($row=mysqli_fetch_assoc($result))
@@ -201,7 +201,7 @@ include 'webpage_header.php';
 									echo "<td>".$sy."</td>";
 									echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 									// echo "<td>".$row['t_submit_date']."</td>";
-									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
+									
 									echo "</tr>";
 								}
 								echo "</table>";
@@ -213,7 +213,7 @@ include 'webpage_header.php';
 				echo "<div class='panel-heading'>
 						        <div class='panel-title'><h4><b>Report</b></h4></div>
 						    </div>";
-							$qry="SELECT * FROM submission";
+							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."'";
 							$result=mysqli_query($con,$qry);
 							echo "<table class='table table-striped table-bordered'>";
 								echo "<tbody>";
@@ -241,7 +241,7 @@ include 'webpage_header.php';
 									echo "<td>".$re."</td>";
 									echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 									// echo "<td>".$row['t_submit_date']."</td>";
-									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
+									echo "<td><a href='del_synopsis.php?id=".$row["sub_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
 									echo "</tr>";
 								}
 								echo "</table>";

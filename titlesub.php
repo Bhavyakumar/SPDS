@@ -66,11 +66,38 @@ $(document).ready(function(){
 	
 	</form>
 	<?php
-			$query="SELECT * FROM title where t_status=0 or t_status=2";
+			$query="SELECT * FROM title where t_status=1 and reg_no='".$_SESSION['reg']."'";
 			$abc= mysqli_query($con,$query);
 			if(mysqli_num_rows($abc))
 			{
-							$qry="SELECT * FROM title";
+				$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no where t_status=1 and student.reg_no='".$_SESSION['reg']."'";
+							// echo $sql;
+							$res=mysqli_query($con,$sql);
+							echo "<div class='toast col-sm-6' data-autohide='false'>";
+							  echo "<div class='toast-header'>";
+    							// echo "<img src='...' class='rounded mr-2' alt='...'>";
+    							 	echo "<strong class='mr-auto text-primary'>Finalize Title</strong>";
+   									// echo " <small>11 mins ago</small>";
+   										echo" <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' id='sub' aria-label='Close'>";
+      										 echo"<span aria-hidden='true'>&times;</span>";
+										echo "</button>";
+							  echo " </div>";
+							while($row = mysqli_fetch_assoc($res))
+							{
+									echo " <div class='toast-body'>";
+							        echo "Name: ".$name=$row['name']."<br>";
+							  		 echo " Email: ".$name=$row['email']."<br>";
+							        echo " Final Title: ".$name=$row['title']."<br>";
+							        echo " Final Title Description: ".$name=$row['title_decscription']."";
+							        echo "</div>";
+							}
+						echo "</div>";
+							
+				}
+				else
+				{
+							// echo "<span style='font-weight:bold;color:red'>Final Title :</span>";
+							$qry="SELECT * FROM title where reg_no='".$_SESSION['reg']."'";
 							$result=mysqli_query($con,$qry);
 
 							echo "<table class='table table-striped table-bordered'>";
@@ -96,32 +123,6 @@ $(document).ready(function(){
 									echo "</tr>";
 								}
 								echo "</table>";
-				}
-				else
-				{
-							// echo "<span style='font-weight:bold;color:red'>Final Title :</span>";
-							$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no where t_status=1 and student.reg_no='".$_SESSION['reg']."'";
-							// echo $sql;
-							$res=mysqli_query($con,$sql);
-							echo "<div class='toast col-sm-6' data-autohide='false'>";
-							  echo "<div class='toast-header'>";
-    							// echo "<img src='...' class='rounded mr-2' alt='...'>";
-    							 	echo "<strong class='mr-auto text-primary'>Finalize Title</strong>";
-   									// echo " <small>11 mins ago</small>";
-   										echo" <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' id='sub' aria-label='Close'>";
-      										 echo"<span aria-hidden='true'>&times;</span>";
-										echo "</button>";
-							  echo " </div>";
-							while($row = mysqli_fetch_assoc($res))
-							{
-									echo " <div class='toast-body'>";
-							        echo "Name: ".$name=$row['name']."<br>";
-							  		 echo " Email: ".$name=$row['email']."<br>";
-							        echo " Final Title: ".$name=$row['title']."<br>";
-							        echo " Final Title Description: ".$name=$row['title_decscription']."";
-							        echo "</div>";
-							}
-						echo "</div>";
 				}
 							
 	?>

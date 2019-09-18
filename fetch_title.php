@@ -80,11 +80,11 @@ if($_SESSION['type']=='Minor')
 					$i++;
 					if($row['t_status']=='2')
 					{
-					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span>	</mark></td>";
+					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span>	</mark></td>";
 					}
 					else
 					{
-						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+						echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
 					}
 					// else
 					// {
@@ -142,16 +142,19 @@ if($_SESSION['type']=='Major')
 
 					if($row['t_status']=='2')
 					{
+						// echo $row['title'];
 					echo "<td><mark><span style='font-weight:bold'><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</span>	</mark></td>";
 					}
-					else{
+					else
+					{
 						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
 					}
 					if($row['t_status']=='1')
 					{
 						echo "<input type='hidden' name='hidden' id='hidden' value='".$row['reg_no']."'>";
-						$rem="delete from title where t_status='2' and reg_no='".$row['reg_no']."' or t_status='0'";	
-						$del=mysqli_query($con,$rem); 	
+						// $rem="delete from title where t_status='0' or t_status='2' and reg_no='".$row['reg_no']."'";	
+								// echo $rem;
+						// $del=mysqli_query($con,$rem); 		
 
 					}
 					echo "<td>".$row['title_decscription']."</td></tr>";

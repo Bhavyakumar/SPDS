@@ -25,7 +25,7 @@
               <?php
                      if(isset($_GET['err']))
                       { 
-                         echo"<div style='display:' id='login-alert' class='alert alert-danger col-sm-12'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a> Successfully uploaded Synopsis.</div>";
+                         echo"<div style='display:' id='login-alert' class='alert alert-danger col-sm-12'> <button type='button' class='close' data-dismiss='alert'>&times;</button>Successfully uploaded Project.</div>";
                       }
               ?>
               <div class="form-group col-md-6">

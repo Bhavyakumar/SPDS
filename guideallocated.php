@@ -28,7 +28,9 @@
 
 				$qr="insert into minor_guide (reg_no,f_id) values ('$regno','$min') ";
 				mysqli_query($con,$qr);
-				
+				$query="update student set s_status=1 where reg_no='".$regno."'";
+				 // echo $query;
+				mysqli_query($con,$query);
 		  		$maj="";
 		  		$min="";
 		  		$regno="";

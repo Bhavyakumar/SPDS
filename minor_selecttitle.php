@@ -11,8 +11,8 @@ include 'connection.php';
 		  	}
 		  	if($min!="")
 		  	{
-		  		// echo $min;
-		  		$sql="update title set t_status='2' where t_id=".$min;
+		  		 echo $min;
+		  		$sql="update title set t_status=2 where t_id=".$min;
 		  		mysqli_query($con,$sql);
 		  		$min="";
 
@@ -40,7 +40,7 @@ include 'connection.php';
 			}
 		}
 		$hid=$_POST['hidden'];
-		$sql1="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE t_status='1'";
+		$sql1="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE t_id='".$maj."'";
 		//require 'phpmailer/PHPMailerAutoload.php';
 		 require 'PHPMailer\phpmailer\PHPMailerAutoload.php';
 
@@ -62,7 +62,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    // $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+    $mail->SMTPDebug = 4;                                       // Enable verbose debug output
     $mail->isSMTP();                                            // Set mailer to use SMTP
     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -94,7 +94,7 @@ try {
 		
 }
 // header_remove();
-header("location:fetch_title.php?err");
+// header("location:fetch_title.php?err");
 //header( 'Location:http://localhost/project/fetch_title.php');
 exit;
 ?>

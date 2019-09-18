@@ -11,21 +11,33 @@ if(isset($_POST['submit']))
 	echo $name;
 	$tmp_file=$_FILES['myfile']['tmp_name'];
 	echo $tmp_file;
-	if($name)
+	$sql="select * from submission where reg_no='".$reg."'";
+	$rs=mysqli_query($con,$sql);
+	if ($row=mysqli_num_rows($rs)) 
 	{
-		$location="Documents/Synopsis/$name";
-		move_uploaded_file($tmp_file,$location);
-		$qry="insert into submission(reg_no,t_id,synopsis,synopsis_date) values ('$reg','$tid','$location','$sydate')";
-		//echo $qry;
-		mysqli_query($con,$qry);
-		 $last_id = $con->insert_id;
-		 setcookie("subid",$last_id);
-		header('Location:stud_synopsis.php?err');
+			$location="Documents/Synopsis/$name";
+			move_uploaded_file($tmp_file,$location);
+			$qry="update submission set synopsis='".$location."',synopsis_date='".$sydate."' where reg_no='".$reg."'";
+		// echo $qry;
+			mysqli_query($con,$qry);
+				header('Location:stud_synopsis.php?err');
 	}
 	else
-		{
-			echo "Failed Upload";
-		}
+	{
+				if($name)
+				{
+					$location="Documents/Synopsis/$name";
+					move_uploaded_file($tmp_file,$location);
+					$qry="insert into submission(reg_no,t_id,synopsis,synopsis_date) values ('$reg','$tid','$location','$sydate')";
+					//echo $qry;
+					mysqli_query($con,$qry);
+					header('Location:stud_synopsis.php?err');
+				}
+				else
+					{
+						echo "Failed Upload";
+					}
+	}
 }
 
 

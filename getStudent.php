@@ -2,8 +2,8 @@
 include 'connection.php';
 $sem_id=$_GET['sid'];
 // setcookie("sem_id","$_GET['sid']");
-	$sql = "SELECT * FROM student where sem_id=".$sem_id;
-	echo"<form action='guideallocated.php' method='POST'>";	//echo $sql;
+	$sql = "SELECT * FROM student where sem_id='".$sem_id."'";
+	echo"<form action='guideallocated.php' method='POST'>";//	echo $sql;
 	if($result = mysqli_query($con, $sql)){
    		 if(mysqli_num_rows($result) > 0){
        		 	echo "<table border=1 class='table table-bordered'>";
@@ -68,7 +68,7 @@ $sem_id=$_GET['sid'];
     }
     else
     {
-        echo "<div class='alert alert-success' role='alert'>No Guide allocation is done.</div>";
+       echo "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>No Students are register.</div>";
     }
       echo "</form>";
 }  

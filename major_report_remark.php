@@ -10,7 +10,7 @@
 						$query="SELECT * from remark where sub_id='".$subid."' and status=1" ;
 						// echo $query;
 						$result=mysqli_query($con,$query);
-						if(mysqli_num_rows($result)>=1)
+						if(mysqli_num_rows($result)>0)
 						{
 							$rem="update remark set re_remark='".$remark."' where sub_id='".$subid."' and status=1";
 							$uprem=mysqli_query($con,$rem);

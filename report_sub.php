@@ -12,7 +12,7 @@ if(isset($_POST['send']))
 	{
 		$loc="Documents/Report/$name";
 		move_uploaded_file($tmp_file,$loc);
-		$qry="update submission set report='".$loc."',report_date='".$redate."' where reg_no='".$reg."' And sub_id='".$sub."'";
+		$qry="update submission set report='".$loc."',report_date='".$redate."' where reg_no='".$reg."'";
 		// echo $qry;
 		mysqli_query($con,$qry);
 		header('Location:stud_synopsis.php?arr');
