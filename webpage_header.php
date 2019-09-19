@@ -144,7 +144,11 @@
                 if(isset($_SESSION['stud']))
                 {
                   echo "<li><a href='titlesub.php'>Title</a></li>";
-                  echo "<li><a href='stud_synopsis.php'>Submission</a></li>";
+                  include "connection.php";
+                    $requery="SELECT * FROM remark where status=1 and re_status=0 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+                    $rerem=mysqli_query($con,$requery);
+                    $hel=mysqli_num_rows($rerem);
+                  echo "<li><a href='stud_synopsis.php'>Submission<span class='badge badge-light'>".$hel."</span></a></li>";
                   // echo "<li><span class='glyphicon glyphicon-bell' style='font-size:24px'></li>";
                         
 
@@ -153,12 +157,13 @@
             <!-- <li><a href="#">Projects</a></li> -->
             <!-- <li><a href="#">Contact</a></li> -->
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <div style="margin-left: 1030px;">
+          <ul class="nav navbar-nav navbar-right" >
             <?php
             
             if(isset($_SESSION['pm']) || isset($_SESSION['stud']) || isset($_SESSION['type']) || isset($_SESSION['clerk']))
             {
-                 echo '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class=" glyphicon glyphicon-cog" style="font-size:24px"></i><span class="caret">';
+                 echo '<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class=" glyphicon glyphicon-cog" style="font-size:24px"></i><span class="caret">';
                   echo '<ul class="dropdown-menu">';
                          echo '<li><a href="update_profile.php"><span class="glyphicon glyphicon-user"> Profile </span></a></li>';
                           echo '<li><a href="logout.php"><span class="glyphicon glyphicon-off"> Logout </span></a></li>';
@@ -177,6 +182,6 @@
               ';
             }
             ?>
-          </ul> 
+          </ul> </div>
      </div>
      <div class="col-sm-10">

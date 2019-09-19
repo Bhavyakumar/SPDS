@@ -149,14 +149,14 @@ if($_SESSION['type']=='Major')
 					{
 						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
 					}
-					if($row['t_status']=='1')
-					{
-						echo "<input type='hidden' name='hidden' id='hidden' value='".$row['reg_no']."'>";
-						// $rem="delete from title where t_status='0' or t_status='2' and reg_no='".$row['reg_no']."'";	
-								// echo $rem;
-						// $del=mysqli_query($con,$rem); 		
+					// if($row['t_status']=='1')
+					// {
+					// 	// echo "<input type='hidden' name='hidden' id='hidden' value='".$row['reg_no']."'>";
+					// 	// $rem="delete from title where t_status='0' or t_status='2' and reg_no='".$row['reg_no']."'";	
+					// 			// echo $rem;
+					// 	// $del=mysqli_query($con,$rem); 		
 
-					}
+					// }
 					echo "<td>".$row['title_decscription']."</td></tr>";
 			}	
 			echo "</table>";

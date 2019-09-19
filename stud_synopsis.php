@@ -13,8 +13,23 @@ include 'webpage_header.php';
 				$title=$rw['title'];
 				$tid=$rw['t_id'];
 			}
+			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+			$rem=mysqli_query($con,$query);
+			$count=mysqli_num_rows($rem);
+
 			echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#syModal">Synopsis Submission</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reModal">Report Submission</button>';
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reModal">Report Submission</button>';
+				echo'<br><button type="button" style="margin-left:760px;" class="btn btn-primary" data-toggle="modal" data-target="#SyMajorRemark">
+					  Synopsis Remark <span class="badge badge-light">'.$count.'</span>
+			  		<span class="sr-only">unread messages</span>
+				</button>';
+				$requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."'";
+				$rerem=mysqli_query($con,$requery);
+				$hel=mysqli_num_rows($rerem);
+				echo'&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ReMajorRemark">
+					  Report Remark <span class="badge badge-light">'.$hel.'</span>
+			  		<span class="sr-only">unread messages</span>
+				</button>';
 	}
 	else
 	{
@@ -52,6 +67,103 @@ include 'webpage_header.php';
     			   ?>
     </div>
 	</div><br>
+	<?php
+		$sy="SELECT * FROM remark INNER JOIN submission ON submission.sub_id=remark.sub_id where submission.reg_no='".$_SESSION['reg']."' AND remark.status=1";
+		$abc=mysqli_query($con,$sy);
+		while($tt=mysqli_fetch_assoc($abc))
+		{
+			$syrem=$tt['sy_remark'];
+			$sdate=$tt['synopsis_date'];
+			 // echo $SY ;
+            $SYDate = date("d-m-Y", strtotime($sdate));
+            $rid=$tt['r_id'];
+            // echo $rid ;
+		}
+
+	?>
+	 <div class="modal fade" id="SyMajorRemark" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+			      <div class="modal-content">
+				        <div class="modal-header">
+					          <h4 class="modal-title">Synopsis Remarks</h4>
+				        </div>
+				        <div class="modal-body">
+				         	<form action='stud_synopsis.php' enctype='multipart/form-data' method='POST'>
+				         			<table border=1 class='table table-bordered'>
+				         				<tr>
+				         					<th>Date of Synopsis Send</th>	
+				         					<th>Remark</th>
+				         					<input type="hidden" name="Rid" value="<?php echo $rid;?>">
+				         				</tr>
+				         				<tr>
+				         					<td><?php echo $SYDate?></td>
+				         					<td><?php echo $syrem?></td>
+				         				</tr>	
+				         			</table>
+				        </div>
+				        <div class="modal-footer">
+				         	 <button type="submit" class="btn btn-primary" name="Done">OK</button>
+				          
+				        </div>
+				         </form>
+			      </div>
+	      
+	    </div>
+  </div>
+<?php
+	if(isset($_POST["Done"]))
+	{
+		 $Remid=$_POST['Rid'];
+		 // echo $Remid;
+		 $updt="Update remark set sy_status='1' where r_id='".$Remid."' and status='1'";
+		 $update=mysqli_query($con,$updt);
+
+	}
+		$re="SELECT * FROM remark INNER JOIN submission ON submission.sub_id=remark.sub_id where submission.reg_no='".$_SESSION['reg']."' AND remark.status=1";
+		$cd=mysqli_query($con,$re);
+		while($td=mysqli_fetch_assoc($cd))
+		{
+			$rerem=$td['re_remark'];
+			$rdate=$td['report_date'];
+			 // echo $SY ;
+            $REDate = date("d-m-Y", strtotime($rdate));
+		}
+
+	?>
+
+   <div class="modal fade" id="ReMajorRemark" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+			      <div class="modal-content">
+				        <div class="modal-header">
+					          <h4 class="modal-title">Report Remarks</h4>
+				        </div>
+				        <div class="modal-body">
+				         	<form action='synopsis_sub.php' enctype='multipart/form-data' method='POST' >
+				         		<!-- <?php  $syrem;?> -->
+				         		<table border=1 class='table table-bordered'>
+				         				<tr>
+				         					<th>Date of Report Send</th>	
+				         					<th>Remark</th>
+				         				</tr>
+				         				<tr>
+				         					<td><?php echo $REDate?></td>
+				         					<td><?php echo $rerem?></td>
+				         				</tr>	
+				         			</table>
+				         		
+				        </div>
+				        <div class="modal-footer">
+				         	 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				           </form>
+				        </div>
+			      </div>
+	      
+	    </div>
+  </div>
 		
 	<!-- 	<button type="submit"  class="btn btn-primary" name="submit" id="submit">Remarks</button> -->
 		<div class="modal fade" id="syModal">
@@ -139,33 +251,34 @@ include 'webpage_header.php';
       			</div>
     	</div>
 	</div>
-	<div class="panel-heading">
+
+	<!-- <div class="panel-heading">
         <div class="panel-title"><h4><b>Remarks</b></h4></div>
-    </div>
-    <?php 
-    		$qry="SELECT * FROM remark INNER JOIN faculty ON faculty.f_id=remark.f_id INNER JOIN student ON student.reg_no=remark.reg_no where remark.reg_no='". $_SESSION['reg']."' AND status=1";
-    		$result=mysqli_query($con,$qry);
-    			echo "<table border=1 class='table table-bordered'>";
-		           		echo "<tr>";
-				                echo "<th>Reg no</th>";
-				                echo "<th>Name</th>";
-				                echo "<th>Email</th>";
-				                echo "<th>Guide Name</th>";
-				                echo "<th>Synopsis Remark</th>";
-				                echo "<th>Report Remark</th>";
-		                echo "</tr>";
-		                while ($tt=mysqli_fetch_assoc($result))
-		                {
-		                		echo "<tr>";
-		                				echo "<td>".$tt['reg_no']."</td>";	
-		                				echo "<td>".$tt['name']."</td>";	
-		                				echo "<td>".$tt['email']."</td>";	
-		                				echo "<td>".$tt['fname']."</td>";	
-		                				echo "<td>".$tt['sy_remark']."</td>";
-		                				echo "<td>".$tt['re_remark']."</td>";		
-		                		echo "</tr>";	
-		                }
-		        echo "</table>";
+    </div> -->
+  <?php 
+    // 		$qry="SELECT * FROM remark INNER JOIN faculty ON faculty.f_id=remark.f_id INNER JOIN student ON student.reg_no=remark.reg_no where remark.reg_no='". $_SESSION['reg']."' AND status=1";
+    // 		$result=mysqli_query($con,$qry);
+    // 			echo "<table border=1 class='table table-bordered'>";
+		  //          		echo "<tr>";
+				//                 echo "<th>Reg no</th>";
+				//                 echo "<th>Name</th>";
+				//                 echo "<th>Email</th>";
+				//                 echo "<th>Guide Name</th>";
+				//                 echo "<th>Synopsis Remark</th>";
+				//                 echo "<th>Report Remark</th>";
+		  //               echo "</tr>";
+		  //               while ($tt=mysqli_fetch_assoc($result))
+		  //               {
+		  //               		echo "<tr>";
+		  //               				echo "<td>".$tt['reg_no']."</td>";	
+		  //               				echo "<td>".$tt['name']."</td>";	
+		  //               				echo "<td>".$tt['email']."</td>";	
+		  //               				echo "<td>".$tt['fname']."</td>";	
+		  //               				echo "<td>".$tt['sy_remark']."</td>";
+		  //               				echo "<td>".$tt['re_remark']."</td>";		
+		  //               		echo "</tr>";	
+		  //               }
+		  //       echo "</table>";
 		   	$query="SELECT * FROM submission where sy_status=0 ";
 			$abc= mysqli_query($con,$query);
 			if(mysqli_num_rows($abc))
@@ -250,5 +363,6 @@ include 'webpage_header.php';
     ?>
 </div>
 <?php
+
 include 'webpage_footer.php';
 ?>

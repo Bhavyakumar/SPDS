@@ -54,6 +54,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title</th>";
+							echo "<th>Submission Date</th>";
 							echo "<th>Synopsis(Download)</th>";
 							echo "<th>Remarks</th>";
 						echo "</tr>";
@@ -85,6 +86,9 @@ if($_SESSION['type']=='Minor')
 					$arr[$i]=$row['reg_no'];
 					$i++;
 					echo "<td>".$row['title']."</td>";
+					$original=$row['synopsis_date'];
+                    $newDate = date("d-m-Y", strtotime($original));
+					echo "<td><b>".$newDate."<b></td>";
 					echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 
 					 echo "<td><button class='btn submitButtonremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#remark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
@@ -197,6 +201,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title</th>";
+							echo "<th>Submission Date</th>";
 							echo "<th>Remarks of Minor Guide</th>";
 							echo "<th>Synopsis(Download)</th>";
 							echo "<th>Remarks</th>";
@@ -231,6 +236,9 @@ if($_SESSION['type']=='Major')
 					$arr[$i]=$row['reg_no'];
 					$i++;
 					echo "<td>".$row['title']."</td>";
+					$original=$row['synopsis_date'];
+                    $newDate = date("d-m-Y", strtotime($original));
+					echo "<td><b>".$newDate."<b></td>";
 					$query="SELECT * FROM remark WHERE status=0 and reg_no='".$row['reg_no']."'";
 					// echo $query;
 					$re= mysqli_query($con,$query);

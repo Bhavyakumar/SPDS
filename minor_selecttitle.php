@@ -1,6 +1,8 @@
 <?php
 	// print_r($_POST);
 include 'connection.php';
+		 require 'PHPMailer\phpmailer\PHPMailerAutoload.php';
+
 	if(isset($_POST['accept']))
 	{
   		$min="";
@@ -36,14 +38,11 @@ include 'connection.php';
 		  		 // echo $maj;
 		  		$sql="update title set t_status='1', t_submit_date='".$date."' where t_id='".$maj."'";
 		  		mysqli_query($con,$sql);
-		  		$maj="";
-			}
-		}
-		$hid=$_POST['hidden'];
-		$sql1="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE t_id='".$maj."'";
+		  			$sql1="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE title.t_id='".$maj."'";
+		  			echo $sql1;
+		// echo $hid;
 		//require 'phpmailer/PHPMailerAutoload.php';
-		 require 'PHPMailer\phpmailer\PHPMailerAutoload.php';
-
+				
 		$qr=mysqli_query($con,$sql1);
 		while ($ra=mysqli_fetch_assoc($qr)) {
 
@@ -51,8 +50,14 @@ include 'connection.php';
        			echo $email=$ra['email'];
        			echo $title=$ra['title'];
 
+
+
        			echo $reg_no=$ra['reg_no'];
        			echo $tid=$ra['title_decscription'];
+
+       				$rem="delete from title where (t_status='0' OR t_status='2') and reg_no='".$reg_no."'";	
+				// echo $rem;
+				 $del=mysqli_query($con,$rem);
        		
 
 		
@@ -62,7 +67,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = 4;                                       // Enable verbose debug output
+    // $mail->SMTPDebug = 0;                                       // Enable verbose debug output
     $mail->isSMTP();                                            // Set mailer to use SMTP
     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -92,9 +97,14 @@ try {
 
 	}
 		
+		  		$maj="";
+			}
+		}
+		// $hid=$_POST['hidden'];
+	
 }
 // header_remove();
-// header("location:fetch_title.php?err");
+header("location:fetch_title.php?err");
 //header( 'Location:http://localhost/project/fetch_title.php');
 exit;
 ?>
