@@ -38,6 +38,7 @@
 <?php
 if(isset($_POST['submit']))
 {
+	
 	echo "<div class='col-sm-12'>";
 			$sem=$_POST['sem'];
 

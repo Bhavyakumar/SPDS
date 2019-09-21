@@ -1,5 +1,14 @@
+<script>
+  $('#notifivationPopup').popover({
+       html: true,
+       title: "Notifications",
+       content: content,
+       placement: 'bottom',
+       trigger:'focus'
+    }).popover('show');
+</script>
 <?php
-include 'webpage_header.php';
+	include 'webpage_header.php';
 	include 'connection.php';
 	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1";
 	// echo $sql;
@@ -16,20 +25,29 @@ include 'webpage_header.php';
 			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
 			$rem=mysqli_query($con,$query);
 			$count=mysqli_num_rows($rem);
-
+		 // echo $count;
 			echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#syModal">Synopsis Submission</button>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reModal">Report Submission</button>';
-				echo'<br><button type="button" style="margin-left:760px;" class="btn btn-primary" data-toggle="modal" data-target="#SyMajorRemark">
-					  Synopsis Remark <span class="badge badge-light">'.$count.'</span>
+			if($count>0)
+			{
+				 echo'<br><button type="button" id="notifivationPopup" style="margin-left:700px;" class="btn btn-secondary" data-container="body" data-toggle="popover">Synopsis Remark<sup><span class="badge badge-light">'.$count.'</span></sup>
 			  		<span class="sr-only">unread messages</span>
-				</button>';
+				   </button>';
+			}
 				$requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."'";
 				$rerem=mysqli_query($con,$requery);
 				$hel=mysqli_num_rows($rerem);
-				echo'&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ReMajorRemark">
-					  Report Remark <span class="badge badge-light">'.$hel.'</span>
+				// $total=$hel+$count;
+				// session_start();
+				// $_SESSION['noti']=$total;
+				// echo $_SESSION['noti'];
+			if($hel>0)
+			{
+				echo'&nbsp;<button type="button" style="margin-left:20px;"  class="btn btn-primary" >
+					  Report Remark <sup><span class="badge badge-light">'.$hel.'</span></sup>
 			  		<span class="sr-only">unread messages</span>
 				</button>';
+			}
 	}
 	else
 	{
@@ -81,37 +99,7 @@ include 'webpage_header.php';
 		}
 
 	?>
-	 <div class="modal fade" id="SyMajorRemark" role="dialog">
-	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
-			      <div class="modal-content">
-				        <div class="modal-header">
-					          <h4 class="modal-title">Synopsis Remarks</h4>
-				        </div>
-				        <div class="modal-body">
-				         	<form action='stud_synopsis.php' enctype='multipart/form-data' method='POST'>
-				         			<table border=1 class='table table-bordered'>
-				         				<tr>
-				         					<th>Date of Synopsis Send</th>	
-				         					<th>Remark</th>
-				         					<input type="hidden" name="Rid" value="<?php echo $rid;?>">
-				         				</tr>
-				         				<tr>
-				         					<td><?php echo $SYDate?></td>
-				         					<td><?php echo $syrem?></td>
-				         				</tr>	
-				         			</table>
-				        </div>
-				        <div class="modal-footer">
-				         	 <button type="submit" class="btn btn-primary" name="Done">OK</button>
-				          
-				        </div>
-				         </form>
-			      </div>
-	      
-	    </div>
-  </div>
+	  
 <?php
 	if(isset($_POST["Done"]))
 	{
@@ -121,19 +109,26 @@ include 'webpage_header.php';
 		 $update=mysqli_query($con,$updt);
 
 	}
+	if(isset($_POST["OK"]))
+	{
+			$Rmid=$_POST['REid'];
+			$upre="Update remark set re_status='1' where r_id='".$Rmid."' and status='1'";
+			$updateRE=mysqli_query($con,$upre);
+	}
 		$re="SELECT * FROM remark INNER JOIN submission ON submission.sub_id=remark.sub_id where submission.reg_no='".$_SESSION['reg']."' AND remark.status=1";
 		$cd=mysqli_query($con,$re);
-		while($td=mysqli_fetch_assoc($cd))
+		while($ts=mysqli_fetch_assoc($cd))
 		{
-			$rerem=$td['re_remark'];
-			$rdate=$td['report_date'];
+			$rerem=$ts['re_remark'];
+			$rdate=$ts['report_date'];
 			 // echo $SY ;
             $REDate = date("d-m-Y", strtotime($rdate));
+                $reid=$ts['r_id'];
 		}
 
 	?>
 
-   <div class="modal fade" id="ReMajorRemark" role="dialog">
+   <div class="modal fade" id="ReMajorRemark">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
@@ -142,24 +137,14 @@ include 'webpage_header.php';
 					          <h4 class="modal-title">Report Remarks</h4>
 				        </div>
 				        <div class="modal-body">
-				         	<form action='synopsis_sub.php' enctype='multipart/form-data' method='POST' >
-				         		<!-- <?php  $syrem;?> -->
-				         		<table border=1 class='table table-bordered'>
-				         				<tr>
-				         					<th>Date of Report Send</th>	
-				         					<th>Remark</th>
-				         				</tr>
-				         				<tr>
-				         					<td><?php echo $REDate?></td>
-				         					<td><?php echo $rerem?></td>
-				         				</tr>	
-				         			</table>
-				         		
+				         	<form action='stud_synopsis.php' enctype='multipart/form-data' method='POST'>
+				         
 				        </div>
 				        <div class="modal-footer">
-				         	 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				         	 <button type="submit" class="btn btn-primary" name="OK">OK</button>
 				           </form>
 				        </div>
+				        
 			      </div>
 	      
 	    </div>
@@ -279,8 +264,8 @@ include 'webpage_header.php';
 		  //               		echo "</tr>";	
 		  //               }
 		  //       echo "</table>";
-		   	$query="SELECT * FROM submission where sy_status=0 ";
-			$abc= mysqli_query($con,$query);
+		   	$qr="SELECT * FROM submission where sy_status=0 ";
+			$abc= mysqli_query($con,$qr);
 			if(mysqli_num_rows($abc))
 			{
 							echo "<div class='panel-heading'>

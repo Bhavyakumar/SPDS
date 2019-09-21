@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2019 at 12:32 AM
+-- Generation Time: Sep 21, 2019 at 11:02 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -112,15 +112,14 @@ CREATE TABLE `faculty` (
 
 INSERT INTO `faculty` (`f_id`, `d_id`, `fname`, `email`, `phone_no`, `password`, `f_status`, `type`) VALUES
 (21, 18, 'Dr. D. K. Parmar', 'dkparmar@aau.in', '8978456958', 'dkparmar@aau.in', 1, 'Major'),
-(22, 18, 'Dr. D. R. Kathiriya', 'deanait@aau.in', '9898785620', 'deanait@aau.in', 0, NULL),
-(23, 18, 'Dr. R. S. Parmar', 'rsparmar@aau.in', '8898564785', 'rsparmar@aau.in', 0, NULL),
-(24, 18, 'Dr. Mayur Raj', 'mpraj@aau.in', '9874562130', 'mpraj@aau.in', 0, NULL),
-(25, 19, 'Dr. J. V. Suthar', 'jvsuthar@aau.in', '7898959652', 'jvsuthar@aau.in', 0, NULL),
-(26, 19, 'Dr. G. B. Chaudhari', 'gbchaudhari@aau.in', '9898982581', 'gbchaudhari@aau.in', 0, NULL),
-(28, 18, 'Er. Vishal Mehra', 'vishal@aau.in', '9898987845', 'vishal@aau.in', 0, NULL),
-(29, 19, 'Prof. N. M. Vegad', 'nileshvegad@aau.in', '9878787845', 'nileshvegad@aau.in', 0, NULL),
-(30, 19, 'Dr. V. B. Darji ', 'vbdarji@aau.in', '8787956488', 'vbdarji@aau.in', 0, NULL),
-(31, 18, 'Prof. K. P. Patel', 'kpatel@aau.in', '7878789865', 'kpatel@aau.in', 0, NULL);
+(22, 18, 'Dr. D. R. Kathiriya', 'deanait@aau.in', '9898785620', 'deanait@aau.in', 1, 'Major'),
+(23, 18, 'Dr. R. S. Parmar', 'rsparmar@aau.in', '8898564785', 'rsparmar@aau.in', 1, 'Major'),
+(24, 18, 'Dr. Mayur Raj', 'mpraj@aau.in', '9874562130', 'mpraj@aau.in', 1, 'Major'),
+(25, 19, 'Dr. J. V. Suthar', 'jvsuthar@aau.in', '7898959652', 'jvsuthar@aau.in', 1, 'Minor'),
+(26, 19, 'Dr. G. B. Chaudhari', 'gbchaudhari@aau.in', '9898982581', 'gbchaudhari@aau.in', 1, 'Minor'),
+(28, 18, 'Er. Vishal Mehra', 'vishal@aau.in', '9898987845', 'vishal@aau.in', 1, 'Minor'),
+(29, 19, 'Prof. N. M. Vegad', 'nileshvegad@aau.in', '9878787845', 'nileshvegad@aau.in', 1, 'Minor'),
+(31, 18, 'Prof. K. P. Patel', 'kpatel@aau.in', '7878789865', 'kpatel@aau.in', 1, 'Minor');
 
 -- --------------------------------------------------------
 
@@ -134,6 +133,24 @@ CREATE TABLE `major_guide` (
   `f_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `major_guide`
+--
+
+INSERT INTO `major_guide` (`maj_id`, `reg_no`, `f_id`) VALUES
+(119, '06-0248-2017', 21),
+(120, '06-0249-2017', 21),
+(121, '06-0200-2016', 21),
+(122, '06-0201-2016', 24),
+(123, '06-0202-2016', 21),
+(124, '06-0203-2016', 23),
+(125, '06-0208-2016', 24),
+(126, '06-0209-2016', 22),
+(127, '06-0210-2016', 22),
+(128, '06-0212-2016', 22),
+(129, '06-0218-2016', 21),
+(130, '06-0231-2016', 21);
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +162,24 @@ CREATE TABLE `minor_guide` (
   `reg_no` varchar(20) NOT NULL,
   `f_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `minor_guide`
+--
+
+INSERT INTO `minor_guide` (`minor_id`, `reg_no`, `f_id`) VALUES
+(117, '06-0248-2017', 25),
+(118, '06-0249-2017', 25),
+(119, '06-0200-2016', 28),
+(120, '06-0201-2016', 25),
+(121, '06-0202-2016', 29),
+(122, '06-0203-2016', 25),
+(123, '06-0208-2016', 25),
+(124, '06-0209-2016', 31),
+(125, '06-0210-2016', 31),
+(126, '06-0212-2016', 31),
+(127, '06-0218-2016', 28),
+(128, '06-0231-2016', 29);
 
 -- --------------------------------------------------------
 
@@ -173,8 +208,18 @@ CREATE TABLE `remark` (
   `sy_remark` varchar(200) NOT NULL,
   `sub_id` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
-  `re_remark` varchar(200) NOT NULL
+  `re_remark` varchar(200) NOT NULL,
+  `sy_status` int(11) NOT NULL DEFAULT 0,
+  `re_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `remark`
+--
+
+INSERT INTO `remark` (`r_id`, `reg_no`, `f_id`, `sy_remark`, `sub_id`, `status`, `re_remark`, `sy_status`, `re_status`) VALUES
+(57, '06-0202-2016', 29, 'No Not done.', 50, 0, '', 0, 0),
+(58, '06-0202-2016', 21, 'Yes', 50, 1, 'OK', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -195,6 +240,16 @@ CREATE TABLE `result` (
   `total` int(3) NOT NULL,
   `f_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `result`
+--
+
+INSERT INTO `result` (`result_id`, `reg_no`, `t_id`, `sub_id`, `project_report`, `design_analysis`, `coding_validation`, `presentation`, `UI_design`, `total`, `f_id`) VALUES
+(84, '06-0202-2016', 121, 50, 30, 12, 10, 7, 7, 66, 21),
+(85, '06-0202-2016', 121, 50, 25, 10, 9, 5, 5, 54, 23),
+(86, '06-0202-2016', 121, 50, 30, 14, 10, 8, 8, 70, 25),
+(87, '06-0202-2016', 121, 50, 25, 10, 10, 6, 6, 57, 22);
 
 -- --------------------------------------------------------
 
@@ -229,25 +284,27 @@ CREATE TABLE `student` (
   `roll_no` int(3) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone_no` varchar(15) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `s_status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`reg_no`, `sem_id`, `name`, `roll_no`, `email`, `phone_no`, `password`) VALUES
-('06-0200-2016', 4, 'Nilay Bhatt', 2, 'nilayb56@student.aau.in', '9898784510', 'nilay@12'),
-('06-0201-2016', 4, 'Virat Chaudhary', 3, 'virat1998@student.aau.in', '8200004225', 'virat@12'),
-('06-0202-2016', 4, 'Bhavyakumar Chaudhary', 4, 'bhavychaudhary5@student.aau.in', '9099672610', 'bhavya@1998'),
-('06-0203-2016', 4, 'Darshan Chovatiya', 5, 'darshanpatidar62@student.aau.in', '7878451230', 'darsh@12'),
-('06-0208-2016', 4, 'Vinod Gelot', 8, 'vinodgelot4830@student.aau.in', '9898784516', 'vinod@12'),
-('06-0209-2016', 4, 'Yashpal Kalaswa', 9, 'yashpal.ckalaswa@student.aau.in', '7900210147', 'yash@12'),
-('06-0210-2016', 4, 'Meet Ladani', 10, 'meetladani12@student.aau.in', '8978987452', 'meet@12'),
-('06-0212-2016', 4, 'Pankaj Makadiya', 12, 'pankajmakadiya1998@student.aau.in', '9898989841', 'pankaj@12'),
-('06-0218-2016', 4, 'Nigam Patel', 18, 'patelnigam4599@student.aau.in', '9624021922', 'nigam@12'),
-('06-0231-2016', 4, 'Darshit tank', 28, 'tankdarhit437@student.aau.in', '7878784512', 'darshit@12'),
-('06-0248-2017', 3, 'Keyur Markana', 5, 'keyurmarkna@student.aau.in', '9078451230', 'keyur@12');
+INSERT INTO `student` (`reg_no`, `sem_id`, `name`, `roll_no`, `email`, `phone_no`, `password`, `s_status`) VALUES
+('06-0200-2016', 4, 'Nilay Bhatt', 2, 'nilayb56@student.aau.in', '9898784510', 'nilay@12', 1),
+('06-0201-2016', 4, 'Virat Chaudhary', 3, 'virat1998@student.aau.in', '8200004225', 'virat@12', 1),
+('06-0202-2016', 4, 'Bhavyakumar Chaudhary', 4, 'bhavychaudhary5@student.aau.in', '90996726106', 'bhavya@1998', 1),
+('06-0203-2016', 4, 'Darshan Chovatiya', 5, 'darshanpatidar62@student.aau.in', '7878451230', 'darsh@12', 1),
+('06-0208-2016', 4, 'Vinod Gelot', 8, 'vinodgelot4830@student.aau.in', '9898784516', 'vinod@12', 1),
+('06-0209-2016', 4, 'Yashpal Kalaswa', 9, 'yashpal.ckalaswa@student.aau.in', '7900210147', 'yash@12', 1),
+('06-0210-2016', 4, 'Meet Ladani', 10, 'meetladani12@student.aau.in', '8978987452', 'meet@12', 1),
+('06-0212-2016', 4, 'Pankaj Makadiya', 12, 'pankajmakadiya1998@student.aau.in', '9898989841', 'pankaj@12', 1),
+('06-0218-2016', 4, 'Nigam Patel', 18, 'patelnigam4599@student.aau.in', '9624021922', 'nigam@12', 1),
+('06-0231-2016', 4, 'Darshit tank', 28, 'tankdarhit437@student.aau.in', '7878784512', 'darshit@12', 1),
+('06-0248-2017', 3, 'Keyur Markana', 5, 'keyurmarkna@student.aau.in', '9078451230', 'keyur@12', 1),
+('06-0249-2017', 3, 'Nirmal Nayi', 6, 'nirmal@student.aau.in', '7878415623', 'nirmal@12', 1);
 
 -- --------------------------------------------------------
 
@@ -260,12 +317,23 @@ CREATE TABLE `submission` (
   `reg_no` varchar(20) NOT NULL,
   `t_id` int(11) NOT NULL,
   `synopsis` varchar(50) NOT NULL,
-  `report` varchar(50) NOT NULL,
+  `report` varchar(50) DEFAULT NULL,
   `synopsis_date` date NOT NULL,
-  `report_date` date NOT NULL,
+  `report_date` date DEFAULT NULL,
   `sy_status` int(1) NOT NULL DEFAULT 0,
-  `report_status` int(1) NOT NULL DEFAULT 0
+  `report_status` int(1) NOT NULL DEFAULT 0,
+  `show` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `submission`
+--
+
+INSERT INTO `submission` (`sub_id`, `reg_no`, `t_id`, `synopsis`, `report`, `synopsis_date`, `report_date`, `sy_status`, `report_status`, `show`) VALUES
+(48, '06-0248-2017', 119, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-19', '2019-09-19', 0, 0, 0),
+(49, '06-0249-2017', 113, 'Documents/Synopsis/footer.php', 'Documents/Report/cait.jpg', '2019-09-19', '2019-09-19', 0, 0, 0),
+(50, '06-0202-2016', 121, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-21', '2019-09-21', 1, 1, 0),
+(52, '06-0201-2016', 128, 'Documents/Synopsis/logo.jpg', 'Documents/Report/ait.jpg', '2019-09-21', '2019-09-21', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -281,6 +349,18 @@ CREATE TABLE `title` (
   `t_submit_date` date NOT NULL,
   `t_status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `title`
+--
+
+INSERT INTO `title` (`t_id`, `reg_no`, `title`, `title_decscription`, `t_submit_date`, `t_status`) VALUES
+(113, '06-0249-2017', 'Information and Management of Pest with  Prevention and Damage Control', 'Information and Management of Pest with  Prevention and Damage Control', '2019-09-19', 1),
+(119, '06-0248-2017', 'AgriNews', 'AgriNews', '2019-09-19', 1),
+(121, '06-0202-2016', 'SPDS', 'Student of AIT', '2019-09-19', 1),
+(126, '06-0218-2016', 'Dairy Hub', 'Dairy Hub', '2019-09-19', 1),
+(128, '06-0201-2016', 'Extention Education System', 'Extention Education System, AAU, Anand', '2019-09-21', 1),
+(132, '06-0231-2016', 'Contract Farming', 'Contract Farming for farmer and company', '2019-09-21', 1);
 
 -- --------------------------------------------------------
 
@@ -426,31 +506,31 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `major_guide`
 --
 ALTER TABLE `major_guide`
-  MODIFY `maj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `maj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `minor_guide`
 --
 ALTER TABLE `minor_guide`
-  MODIFY `minor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `minor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `remark`
 --
 ALTER TABLE `remark`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `semester`
@@ -462,13 +542,13 @@ ALTER TABLE `semester`
 -- AUTO_INCREMENT for table `submission`
 --
 ALTER TABLE `submission`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `title`
 --
 ALTER TABLE `title`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `visit`

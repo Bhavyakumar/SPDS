@@ -10,7 +10,7 @@ session_start();
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>=1)
 						{
-							$rem="update remark set sy_remark='".$remark."' where sub_id='".$subid."' and status=1	";
+							$rem="update remark set sy_remark='".$remark."',sy_status=0 where sub_id='".$subid."' and status=1	";
 							$uprem=mysqli_query($con,$rem);
 							if($uprem)
 							{

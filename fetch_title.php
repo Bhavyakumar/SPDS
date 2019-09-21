@@ -147,7 +147,15 @@ if($_SESSION['type']=='Major')
 					}
 					else
 					{
-						echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+						if($row['t_status']=='1')
+						{
+							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."<img src='image/select.gif' style='width:40px;'></td>";
+							
+						}
+						else
+						{
+							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+						}
 					}
 					// if($row['t_status']=='1')
 					// {

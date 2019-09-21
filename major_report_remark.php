@@ -12,7 +12,7 @@
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>0)
 						{
-							$rem="update remark set re_remark='".$remark."' where sub_id='".$subid."' and status=1";
+							$rem="update remark set re_remark='".$remark."',re_status=0 where sub_id='".$subid."' and status=1";
 							$uprem=mysqli_query($con,$rem);
 							if($uprem)
 							{
@@ -25,7 +25,7 @@
 						}
 						else
 						{
-							$qry= "update remark set re_remark='".$remark."' where sub_id='".$subid."' and status=1";
+							$qry= "update remark set re_remark='".$remark."',re_status=0 where sub_id='".$subid."' and status=1";
 							echo "$qry";
 							$rs=mysqli_query($con,$qry);
 							if($rs)

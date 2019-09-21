@@ -145,10 +145,17 @@
                 {
                   echo "<li><a href='titlesub.php'>Title</a></li>";
                   include "connection.php";
-                    $requery="SELECT * FROM remark where status=1 and re_status=0 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+                    // $requery="SELECT * FROM remark where status=1 and re_status=0 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+                    // $rerem=mysqli_query($con,$requery);
+                    // $hel=mysqli_num_rows($rerem);
+                  $query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+                  $rem=mysqli_query($con,$query);
+                  $count=mysqli_num_rows($rem);
+                  $requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."'";
                     $rerem=mysqli_query($con,$requery);
                     $hel=mysqli_num_rows($rerem);
-                  echo "<li><a href='stud_synopsis.php'>Submission<span class='badge badge-light'>".$hel."</span></a></li>";
+                    $total=$hel+$count;
+                  echo "<li><a href='stud_synopsis.php'>Submission<sup><span class='badge badge-success'>".$total."</span></sup></a></li>";
                   // echo "<li><span class='glyphicon glyphicon-bell' style='font-size:24px'></li>";
                         
 
