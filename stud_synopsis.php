@@ -1,14 +1,10 @@
-<script>
-  $('#notifivationPopup').popover({
-       html: true,
-       title: "Notifications",
-       content: content,
-       placement: 'bottom',
-       trigger:'focus'
-    }).popover('show');
-</script>
+
 <?php
 	include 'webpage_header.php';
+	?>
+
+
+	<?php
 	include 'connection.php';
 	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1";
 	// echo $sql;
@@ -25,26 +21,29 @@
 			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
 			$rem=mysqli_query($con,$query);
 			$count=mysqli_num_rows($rem);
-		 // echo $count;
+			$fet=mysqli_fetch_assoc($rem);
+			$Remarkid=$fet['r_id'];
+		 // echo $Remarkid;
 			echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#syModal">Synopsis Submission</button>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reModal">Report Submission</button>';
 			if($count>0)
 			{
-				 echo'<br><button type="button" id="notifivationPopup" style="margin-left:700px;" class="btn btn-secondary" data-container="body" data-toggle="popover">Synopsis Remark<sup><span class="badge badge-light">'.$count.'</span></sup>
+				 echo'<br><button type="button" id="notifivationPopupButton" value="'.$Remarkid.'" style="margin-left:700px;" class="btn btn-secondary" data-container="body" data-toggle="popover">Synopsis Remark<sup><span class="badge badge-light">'.$count.'</span></sup>
 			  		<span class="sr-only">unread messages</span>
 				   </button>';
 			}
 				$requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."'";
 				$rerem=mysqli_query($con,$requery);
 				$hel=mysqli_num_rows($rerem);
+				$fetch=mysqli_fetch_assoc($rerem);
+				$RemarkidRE=$fetch['r_id'];
 				// $total=$hel+$count;
 				// session_start();
 				// $_SESSION['noti']=$total;
-				// echo $_SESSION['noti'];
+				// echo $RemarkidRE;
 			if($hel>0)
 			{
-				echo'&nbsp;<button type="button" style="margin-left:20px;"  class="btn btn-primary" >
-					  Report Remark <sup><span class="badge badge-light">'.$hel.'</span></sup>
+				echo'&nbsp;<button type="button" id="RenotifivationPopupButton" ReportRe="'.$RemarkidRE.'" class="btn btn-secondary" data-container="body" data-toggle="popover">Report Remark <sup><span class="badge badge-light">'.$hel.'</span></sup>
 			  		<span class="sr-only">unread messages</span>
 				</button>';
 			}
@@ -92,39 +91,28 @@
 		{
 			$syrem=$tt['sy_remark'];
 			$sdate=$tt['synopsis_date'];
-			 // echo $SY ;
-            $SYDate = date("d-m-Y", strtotime($sdate));
+			$SYDate = date("d-m-Y", strtotime($sdate));
             $rid=$tt['r_id'];
             // echo $rid ;
 		}
+		echo "<div id='synopsisNotificationContent' style='display: none;'>".$SYDate.":-".$syrem;
+		echo"</div>";
 
 	?>
 	  
 <?php
-	if(isset($_POST["Done"]))
-	{
-		 $Remid=$_POST['Rid'];
-		 // echo $Remid;
-		 $updt="Update remark set sy_status='1' where r_id='".$Remid."' and status='1'";
-		 $update=mysqli_query($con,$updt);
-
-	}
-	if(isset($_POST["OK"]))
-	{
-			$Rmid=$_POST['REid'];
-			$upre="Update remark set re_status='1' where r_id='".$Rmid."' and status='1'";
-			$updateRE=mysqli_query($con,$upre);
-	}
 		$re="SELECT * FROM remark INNER JOIN submission ON submission.sub_id=remark.sub_id where submission.reg_no='".$_SESSION['reg']."' AND remark.status=1";
 		$cd=mysqli_query($con,$re);
+		$rerem="";
 		while($ts=mysqli_fetch_assoc($cd))
 		{
 			$rerem=$ts['re_remark'];
 			$rdate=$ts['report_date'];
-			 // echo $SY ;
-            $REDate = date("d-m-Y", strtotime($rdate));
-                $reid=$ts['r_id'];
+			$REDate = date("d-m-Y", strtotime($rdate));
+            $reid=$ts['r_id'];
 		}
+		echo "<div class='d-none d-md-block' id='reportNotificationContent' style='display: none;'>".$REDate.":-".$rerem;
+		echo"</div>";
 
 	?>
 
@@ -344,9 +332,103 @@
 								}
 								echo "</table>";
 			}
+			echo  '<div class="panel-heading">
+       				 <div class="panel-title"><h4><b>Remarks</b></h4></div>
+    				</div>';
+    		$qry="SELECT * FROM remark INNER JOIN faculty ON faculty.f_id=remark.f_id INNER JOIN student ON student.reg_no=remark.reg_no where remark.reg_no='". $_SESSION['reg']."' AND status=1";
+    		$result=mysqli_query($con,$qry);
+    			echo "<table border=1 class='table table-bordered'>";
+		           		echo "<tr>";
+				                echo "<th>Reg no</th>";
+				                echo "<th>Name</th>";
+				                echo "<th>Email</th>";
+				                echo "<th>Guide Name</th>";
+				                echo "<th>Synopsis Remark</th>";
+				                echo "<th>Report Remark</th>";
+		                echo "</tr>";
+		                while ($tt=mysqli_fetch_assoc($result))
+		                {
+		                		echo "<tr>";
+		                				echo "<td>".$tt['reg_no']."</td>";	
+		                				echo "<td>".$tt['name']."</td>";	
+		                				echo "<td>".$tt['email']."</td>";	
+		                				echo "<td>".$tt['fname']."</td>";	
+		                				echo "<td>".$tt['sy_remark']."</td>";
+		                				echo "<td>".$tt['re_remark']."</td>";		
+		                		echo "</tr>";	
+		                }
+		        echo "</table>";
 
     ?>
 </div>
+<script>
+	$("#notifivationPopupButton").click(function(){
+		// alert();
+		var R_id=$(this).attr("value");
+		// alert(R_id);
+
+		$('#notifivationPopupButton').popover({
+	       html: true,
+	       title: "Synopsis Remark",
+	       content: $("#synopsisNotificationContent").html(),
+	       placement: 'bottom',
+	       trigger:'focus'
+	    }).popover('show');		
+
+	    $.ajax({
+                url: "updateremark_status.php",
+                type: "GET",
+                data: {
+                    "remid":R_id
+                },
+
+                success: function(data) {
+                    console.log(data);
+                     // $("#student").empty();
+                     // alert(data);
+                   // $("#student").append(data);
+                },
+                error: function (error) {
+                   console.log(error);
+                    alert('error; ' + error.responseText);
+                }
+		// var R_id=(this).attr("value");
+			});	
+	});	
+	$("#RenotifivationPopupButton").click(function(){
+		// alert();
+		var Re_id=$(this).attr("ReportRe");
+		
+		$('#RenotifivationPopupButton').popover({
+	       html: true,
+	       title: "Report Remark",
+	       content: $("#reportNotificationContent").html(),
+	       placement: 'bottom',
+	       trigger:'focus'
+	    }).popover('show');	
+	     $.ajax({
+                url: "updateREremark_status.php",
+                type: "GET",
+                data: {
+                    "Rremid":Re_id
+                },
+
+                success: function(data) {
+                    // console.log(data);
+                     // $("#student").empty();
+                     // alert(data);
+                     // location.reload();
+                   // $("#student").append(data);
+                },
+                error: function (error) {
+                   console.log(error);
+                    alert('error; ' + error.responseText);
+                }
+		// var R_id=(this).attr("value");
+			});		
+	});	
+  
+</script>
 <?php
 
 include 'webpage_footer.php';

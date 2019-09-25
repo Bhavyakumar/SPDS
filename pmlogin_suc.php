@@ -1,32 +1,34 @@
 <?php
 session_start();
-if(isset($_POST['submit']))
+  include 'connection.php';
+  if(isset($_POST['submit']))
 
   {
-      $uname=$_POST['pmuname'];
-      $pmpwd=$_POST['pmpwd'];
-      if($uname=='CAIT' && $pmpwd=='CAIT')
+    $uname=$_POST['pmuname'];
+    $pmpwd=$_POST['pmpwd'];
+    $qry="select * from Admin where username='".$uname."' and password='".$pmpwd."'";
+    $rs=mysqli_query($con,$qry);
+    $result= mysqli_num_rows($rs);
+    $row=mysqli_fetch_assoc($rs);
+    if($result==0)
+    {
+      header('location:pmlogin.php?arr');  
+    }
+    else
+    {
+      if($row['type']=='PM')
       {
-           
-           $_SESSION["pm"]=123;
-           header('location:index.php');
-	    }
-      else
+        $_SESSION["pm"]=$row['username'];
+        header('location:index.php'); 
+      }else
       {
-        if ($uname=='clerkCAIT' && $pmpwd=='clerkCAIT')
-         {
-             $_SESSION["clerk"]=123;
-              header('location:index.php');
-          
-         }
-         else
-         {
-                header('location:pmlogin.php?arr');    
-         }
-
-          // header('location:pmlogin.php?arr');    
-
-      }
+       
+        
+       $_SESSION["clerk"]=$row['username'];
+       header('location:index.php');
+     }           
+   }          
+   
+ }
       
-  }
 ?>

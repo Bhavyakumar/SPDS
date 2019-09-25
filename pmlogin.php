@@ -39,9 +39,16 @@
 
                         <div class="col-sm-12 controls">
                             <button type="submit" name="submit" id="submit"  class="btn btn-primary btn-md">Login</button>
-                        </div>
+                        </div>     <br>     <br>
                       </div>
+
+                  
+                           <div class="col-md-12 control">
+                               <a href="Changepwd.php">Change Password?</a>
+                           </div>
                     </form> 
+
+
                   </div>         
                </div>                     
     </div>  
