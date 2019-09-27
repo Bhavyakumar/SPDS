@@ -1,3 +1,8 @@
+<script>
+  $(document).ready(function() {
+       $("#example").DataTable();
+});
+</script>
 <?php
 include 'connection.php';
 $sem_id=$_GET['sid'];
@@ -9,7 +14,8 @@ $sem_id=$_GET['sid'];
    		 if(mysqli_num_rows($result) > 0)
        {
             
-       		 	 echo "<table border=1 class='table table-bordered'>";
+       		 	 echo "<table border=1 class='table table-bordered' id='example'>";
+             echo "<thead>";
            		     echo "<tr>";
                       echo "<th>Reg no</th>";
                       echo "<th>Name</th>";
@@ -17,9 +23,10 @@ $sem_id=$_GET['sid'];
                       echo "<th>Roll No.</th>";
                       echo "<th>Major Guide</th>";
                       echo "<th>Minor Guide</th>";
+            echo "</thead>";
                    echo "</tr>";
                    $count=0;
-              
+                echo "<tbody>";
                     while($row = mysqli_fetch_array($result))
                     {
                         $count++;
@@ -43,6 +50,8 @@ $sem_id=$_GET['sid'];
                              }
 
                     }
+                    echo "</tbody>";
+                    echo "</table>";
         }
         else
     {

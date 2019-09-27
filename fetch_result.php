@@ -1,3 +1,4 @@
+
 <?php
 	include 'webpage_header.php';
 	include 'connection.php';
@@ -8,6 +9,7 @@
 			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
 			// echo $sql;
 			$rs=mysqli_query($con,$sql);
+			echo "<div id='printTable'>";
 			echo "<table align='center'>";
 				echo "<tr>";
 					echo "<td><b><font color='#fa661b' size='3px'>College Of Agricultural Information Technology</font></b></td>";
@@ -93,16 +95,24 @@
 				// echo $row['roll_no'];
 				// echo $row['semester'];
 				echo "</tr>";
+				echo "<tr>";
+				echo "</tr>";
+
 			}
+
 			echo "</table>";
 			echo "</div>";			
 
 
 			echo"				
 						</div>
-					</div>
-				</div>
-			";
+					</div>";
+					
+			echo"</div>";
+		echo "</div>";
+				  echo "<div class='input-group col-md-offset-9 col-md-6'>";
+					// echo "<input type='button' id='print_result' onclick='printDiv('print');' value='print a div!'/>";
+				echo"</div><br>";
 	}
 	else
 	{
@@ -111,3 +121,17 @@
 	
 			include 'webpage_footer.php';
 ?>
+<script type="text/javascript">
+function printData()
+{
+   var divToPrint=document.getElementById("printTable");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+$('#print_result').on('click',function(){
+alert();
+printData();
+})
+</script>

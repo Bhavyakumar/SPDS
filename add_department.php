@@ -1,6 +1,11 @@
 <?php
   include 'webpage_header.php';
 ?>
+<script>
+  $(document).ready(function() {
+       $("#example").DataTable();
+});
+</script>
 <div class="col-sm-12">
 <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-5 col-sm-8">                    
         <div class="panel panel-info" >
@@ -46,14 +51,16 @@
     {
          if(mysqli_num_rows($result) > 0)
          {
-               echo "<table border=1 class='table table-striped table-bordered'>";
+               echo "<table border=1 class='table table-bordered' id='example'>";
+               echo "<thead>";
                      echo "<tr>";
                         echo "<th>Sr No.</th>";
                         echo "<th>Department name</th>";
                         echo "<th>Delete</th>";
                      echo "</tr>";
+               echo "</thead>";
                      $count=0;
-                
+                    echo "<tbody>";
                       while($row = mysqli_fetch_array($result))
                       {
                           $count++;
@@ -65,13 +72,24 @@
                               echo"</td>";
                           echo "</tr>";    
                       }
-
+                        echo "</tbody>";
                       echo "</table>";
           }
     }
   ?>
 </div> 
 </div>
+<!-- <style>
+tbody {
+  height: 300px;
+  width: auto;
+  display: block;
+  overflow-y: auto;
+}
+thead{
+  width: 300px;
+}
+</style> -->
 <script type="text/JavaScript">
   function check()
   {

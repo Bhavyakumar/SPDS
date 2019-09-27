@@ -6,6 +6,14 @@ $sem_id=$_GET['sid'];
 	echo"<form action='guideallocated.php' method='POST'>";//	echo $sql;
 	if($result = mysqli_query($con, $sql)){
    		 if(mysqli_num_rows($result) > 0){
+            $major_guide="SELECT * FROM major_guide inner join student on student.reg_no=major_guide.reg_no where sem_id='".$sem_id."'";
+             $majrs=mysqli_query($con,$major_guide);
+        if(mysqli_num_rows($majrs))
+        {
+                  echo "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>Guide Allocation is Done.</div>";
+        }
+        else
+        {
        		 	echo "<table border=1 class='table table-bordered'>";
            		echo "<tr>";
                 echo "<th>Reg no</th>";
@@ -64,7 +72,7 @@ $sem_id=$_GET['sid'];
         mysqli_free_result($result);
         // $qry="SELECT * FROM faculty";
         // $result = mysqli_query($con,$qry);      
-	  
+	  }
     }
     else
     {

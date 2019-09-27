@@ -84,7 +84,7 @@ $sem_id=$_GET['sid'];
               }
               else
               {
-                  echo "<div class='alert alert-success' role='alert'>Guide allocation is done.</div>";
+                  echo "<div class='alert alert-success' role='alert'> No Guide allocation is done.</div>";
               }
                 //
           }  

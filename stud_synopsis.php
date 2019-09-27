@@ -85,6 +85,10 @@
     </div>
 	</div><br>
 	<?php
+	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1";
+	$rs=mysqli_query($con,$sql);
+	if(mysqli_num_rows($rs)>0)
+	{
 		$sy="SELECT * FROM remark INNER JOIN submission ON submission.sub_id=remark.sub_id where submission.reg_no='".$_SESSION['reg']."' AND remark.status=1";
 		$abc=mysqli_query($con,$sy);
 		while($tt=mysqli_fetch_assoc($abc))
@@ -113,7 +117,7 @@
 		}
 		echo "<div class='d-none d-md-block' id='reportNotificationContent' style='display: none;'>".$REDate.":-".$rerem;
 		echo"</div>";
-
+}
 	?>
 
    <div class="modal fade" id="ReMajorRemark">

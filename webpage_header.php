@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
   <script src="css/jquery.min.js"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
 
@@ -81,7 +83,7 @@
 <div class="row content"> 
 
     <div class="col-sm-2 sidenav">
-          <a href="http://www.aau.in"><img src="image/logo.jpg" style="width:40%;"></a><h3><b>SPDS</b></h3>
+          <a href="http://www.aau.in"><img src="image/AAU-logo-rotate.gif" style="width:40%;"></a><h3><b>SPDS</b></h3>
           <!-- <div style="margin-left: 150px;"><button type="submit" id="submit"><i class="glyphicon glyphicon-menu-hamburger"></i></button></div> -->
           
           <ul class="nav nav-pills nav-stacked">
@@ -165,7 +167,7 @@
             <!-- <li><a href="#">Contact</a></li> -->
           </ul>
           <div style="margin-left: 1030px;">
-          <ul class="nav navbar-nav navbar-right" >
+          <ul class="nav navbar-nav navbar-right " >
             <?php
             
             if(isset($_SESSION['pm']) || isset($_SESSION['stud']) || isset($_SESSION['type']) || isset($_SESSION['clerk']))
