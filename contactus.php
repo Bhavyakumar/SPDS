@@ -1,5 +1,10 @@
 <?php
   include 'webpage_header.php';
+ ?>
+<div class="col-sm-12" id="section3">
+     <h3 class="section-heading h1 pt-4">Contact us</h3>
+           <div class="row">
+<?php
   echo "<br>";
 	echo "<table align='center'>";
 			echo "<tr>";
@@ -12,7 +17,73 @@
 				echo "<td align='center'><b><font color='#fa661b' size='3px'></font></b></td>";
 			echo "</tr>";
 		echo "</table><br>	";
+
 ?>
+    <!--Grid column-->
+    <div class="col-lg-5 mb-4">
+
+      <!--Form with header-->
+      <div class="card">
+
+        <div class="card-body">
+          <!--Header-->
+          <div class="form-header blue accent-1">
+            <h3><i class="glyphicon glyphicon-envelope"></i> Contact to us:</h3>
+          </div><br>
+
+          <!--Body-->
+          <div class="md-form">
+               <p>College of Agricultural Information Technology</p>
+               <p>AAU, Anand</p>
+          </div>
+
+          <div class="md-form">
+               <p>02692 263 123</p>
+              <p>Mon - Sat, 9:00-18:00</p>
+          </div>
+
+          <div class="md-form">
+              <p>cait@aau.in</p>
+          </div>
+
+        </div>
+
+      </div>
+      <!--Form with header-->
+
+    </div>
+    <div class="col-lg-7">
+
+      <!--Google map-->
+      <div id="map-container-google-11" class="z-depth-1-half map-container-6" style="height: 400px">
+        <div id="map"></div> 
+      <script> 
+      function initMap() { 
+        var uluru = {lat: 22.533718, lng: 72.970071}; 
+        var map = new google.maps.Map(document.getElementById('map'), { 
+          zoom: 4, 
+          center: uluru 
+        }); 
+        var marker = new google.maps.Marker({ 
+          position: uluru, 
+          map: map 
+        }); 
+      } 
+    </script> 
+    <style> 
+      #map { 
+        height: 350px; 
+        width: 100%; 
+       } 
+    </style> 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key= 
+      AIzaSyBVT2Yck5sYqDkIhv9xPy-Xl4ED_Afn-AU&callback=initMap"> 
+    </script> 
+      </div>
+
+  </div>
+</div>
+</div>	
 <?php
   include 'webpage_footer.php';
 ?>

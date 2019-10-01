@@ -53,6 +53,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title (Select Title for Project)</th>";
+							echo "<th>Language(framework)</th>";
 							echo "<th>Title description</th>";
 						echo "</tr>";
 			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=title.reg_no where sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
@@ -91,6 +92,7 @@ if($_SESSION['type']=='Minor')
 					// echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input' value='".$row['t_id']."'>".$row['title']."</td>";
 					// echo "<td>".$row['title_decscription']."</td></tr>";
 					// }	
+					echo "<td>".$row['language']."</td>";
 					echo "<td>".$row['title_decscription']."</td></tr>";
 			}
 				
@@ -115,6 +117,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title (Select Title for Project)</th>";
+							echo "<th>Language(framework)</th>";
 							echo "<th>Title description</th>";
 						echo "</tr>";
 			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN major_guide ON major_guide.reg_no=title.reg_no where sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
@@ -165,6 +168,7 @@ if($_SESSION['type']=='Major')
 					// 	// $del=mysqli_query($con,$rem); 		
 
 					// }
+					echo "<td>".$row['language']."</td>";
 					echo "<td>".$row['title_decscription']."</td></tr>";
 			}	
 			echo "</table>";

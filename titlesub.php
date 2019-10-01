@@ -51,7 +51,7 @@ $(document).ready(function(){
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dynamic_field">
 							<tr>
-								<td><input type="text" name="name[]" placeholder="Enter Title" class="form-control name_list" required="" /></td>
+								<td><input type="text" name="name[]" placeholder="Enter Title" class="form-control name_list" required="" /></td> <td><input type="text" name="lan[]" placeholder="Enter Language(framework)" class="form-control name_list" required="" /></td>
 								<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
 							</tr>
 							<tr>
@@ -107,6 +107,7 @@ $(document).ready(function(){
 										// echo "<th>Reg_no</th>";
 										echo "<th>Title</th>";
 										echo "<th>Title Description</th>";
+										echo "<th>Language(framework)</th>";
 										echo "<th>Submit Date</th>";
 										echo "<th></th>";
 									echo "</tr>";
@@ -118,6 +119,7 @@ $(document).ready(function(){
 									// echo "<td>".$row['reg_no']."</td>";
 									echo "<td>".$row['title']."</td>";
 									echo "<td>".$row['title_decscription']."</td>";
+									echo "<td>".$row['language']."</td>";
 									echo "<td>".$row['t_submit_date']."</td>";
 									echo "<td><a href='del_title.php?id=".$row["t_id"]."' onclick='return check();'><i class='glyphicon glyphicon-remove' style='font-size:25px;'></i></a></td>";
 									echo "</tr>";
@@ -134,7 +136,7 @@ $(document).ready(function(){
 		var i=1;
 		$('#add').click(function(){
 			i++;
-			$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter Title" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr><tr id="row'+i+'"><td colspan="2"><textarea name="des[]" placeholder="Description" class="form-control name_list"></textarea></td></tr>');
+			$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter Title" class="form-control name_list" /></td><td><input type="text" name="lan[]" placeholder="Enter Language(framework)" class="form-control name_list" required="" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr><tr id="row'+i+'"><td colspan="2"><textarea name="des[]" placeholder="Description" class="form-control name_list"></textarea></td></tr>');
 		});
 	
 		$(document).on('click', '.btn_remove', function(){

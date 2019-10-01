@@ -8,6 +8,7 @@ $result=mysqli_query($con,$qry);
 if(mysqli_num_rows($result)>0)
 {
 					$title = count($_POST["name"]);
+					$lan=count($_POST["lan"]);
 					$des = count($_POST["des"]);
 					$reg= $_SESSION['reg'];
 					// echo $reg;
@@ -19,12 +20,13 @@ if(mysqli_num_rows($result)>0)
 						{
 							$name= $_POST["name"][$i];
 							// echo $name;
+							$language=$_POST["lan"][$i];
 							$dscr=$_POST["des"][$i];
 							$date = date('Y-m-d H:i:s');
 						
 							// echo $dscr;
-							$sql = "INSERT INTO title (reg_no,title,title_decscription,t_submit_date
-								) VALUES('$reg','$name','$dscr','$date')";
+							$sql = "INSERT INTO title (reg_no,title,title_decscription,language,t_submit_date
+								) VALUES('$reg','$name','$dscr','$language','$date')";
 								// echo $sql;
 								mysqli_query($con, $sql);
 						}
