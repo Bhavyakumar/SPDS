@@ -52,6 +52,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title</th>";
+							echo "<th>Language(framework)</th>";
 							echo "<th>Submission Date</th>";
 							echo "<th>Report(Download)</th>";
 							echo "<th>Remarks</th>";
@@ -84,6 +85,7 @@ if($_SESSION['type']=='Minor')
 					$arr[$i]=$row['reg_no'];
 					$i++;
 					echo "<td>".$row['title']."</td>";
+					echo "<td>".$row['language']."</td>";
 						$original=$row['report_date'];
                     $newDate = date("d-m-Y", strtotime($original));
 					echo "<td><b>".$newDate."<b></td>";
@@ -199,6 +201,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title</th>";
+							echo "<th>Language(framework)</th>";
 							echo "<th>Submission Date</th>";
 							echo "<th>Remarks of Minor Guide</th>";
 							echo "<th>Report(Download)</th>";
@@ -233,6 +236,7 @@ if($_SESSION['type']=='Major')
 					$arr[$i]=$row['reg_no'];
 					$i++;
 					echo "<td>".$row['title']."</td>";
+					echo "<td>".$row['language']."</td>";
 						$original=$row['report_date'];
                     $newDate = date("d-m-Y", strtotime($original));
 					echo "<td><b>".$newDate."<b></td>";

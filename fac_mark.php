@@ -2,6 +2,13 @@
   include 'webpage_header.php';
   include 'connection.php';
 ?>
+<script>
+  $(document).ready(function() {
+       $("#example").DataTable({
+		"scrollX": true
+		});
+});
+</script>
 <form action="fac_mark.php" method="POST">
 <div class="col-sm-12">
 	<div class="panel-heading">
@@ -42,12 +49,13 @@ if(isset($_POST['submit']))
 	echo "<div class='col-sm-12'>";
 			$sem=$_POST['sem'];
 
-			echo "<table border=1 class='table table-bordered'>";
-					echo "<tbody>";
+			echo "<table border=1 class='table table-bordered' id='example'>";
+					echo "<thead>";
 						echo "<tr>";
 							echo "<th>Registrstion No.</th>";
 							echo "<th>Name</th>";
 							echo "<th>Title</th>";
+							echo "<th>Language(framework)</th>";
 							echo "<th>Synopsis Submit Date</th>";
 							echo "<th>Report Submit Date</th>";
 							echo "<th>Project Report(Out of 45 marks)</th>";
@@ -58,9 +66,10 @@ if(isset($_POST['submit']))
 							echo "<th>Total(Out of 100 marks)</th>";
 							echo "<th></th>";
 						echo "</tr>";
-
+						echo "</thead>";
 				$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.reg_no=submission.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='$sem' AND report_status=1 order by student.reg_no";
 			    // echo $sql;
+			    echo "<tbody>";
 				$rs= mysqli_query($con,$sql);
 				while($row=mysqli_fetch_assoc($rs))
 				{
@@ -68,6 +77,7 @@ if(isset($_POST['submit']))
 						echo "<td>".$row['reg_no']."</td>";
 						echo "<td>".$row['name']."</td>";
 						echo "<td>".$row['title']."</td>";
+						echo "<td>".$row['language']."</td>";
 						$sydate=$row['synopsis_date'];
                         $sy= date("d-m-Y", strtotime($sydate));
 						echo "<td>".$sy."</td>";
@@ -85,7 +95,7 @@ if(isset($_POST['submit']))
 						echo "<td><input type='text' class='total form-control' name='totalmark' id='totalmark".$row['reg_no']."' placeholder='Marks' required readonly></td>";
 						echo "<td align='center'><button  type='button' data='".$row['reg_no']."' id='Mark".$row['reg_no']."' name='Mark' class='btn btn-primary insertMarkButton'><span class='glyphicon glyphicon-ok'></span></button></td>";
 							
-					
+					  echo "</tbody>";
 					echo "</tr>";
 				}
 				
@@ -145,6 +155,11 @@ if(isset($_POST['submit']))
  		});
 	});
 </script>
+<style>
+	.tbody{
+
+	}
+</style>
 <?php
   include 'webpage_footer.php';
 ?>

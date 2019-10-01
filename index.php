@@ -95,7 +95,7 @@
 }
 
 #myBtn:hover {
-  background-color: #555;
+  background-color: #077315;
 }
 </style>
 
@@ -264,8 +264,12 @@
                  </marquee>             
            </div> 
  </div>
-  <div class=" mb-8 col-lg-offset-5">
-     <img src="image/CAIT.jpg" class="img-rounded" alt="Cinque Terre" width="600" height="275">
+<div class="col-lg-offset-5">
+  <video width="600" height="260" loop controls muted>
+    <source src="Video/Countdown_2.mp4" type="video/mp4">
+  </video>
+    <source src="Video/Countdown_2.mp4" type="video/mp4">
+  </video>
     </div>
 </div>
 </div>
@@ -284,7 +288,7 @@
                         <!--Body-->
                         <div class="md-form">
                           
-                            <p><img src="image/AIT.gif" class="img-rounded" alt="Cinque Terre" width="304" height="236"></p>
+                            <p><img src="image/AIT.gif" class="img-rounded" alt="Cinque Terre" width="280" height="200"></p>
                         </div>
 
                       </div>
@@ -294,10 +298,10 @@
 
     </div>
   <div class="col-lg-4 mb-4">
-   <img src="image/CAIT.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
+   <img src="image/CAIT.jpg" class="img-circle" alt="Cinque Terre" width="280" height="200">
  </div>
    <div class="col-lg-4 mb-4">
-    <img src="image/logo.png" class="img-rounded" alt="Cinque Terre" width="304" height="236">
+    <img src="image/logo.png" class="img-rounded" alt="Cinque Terre" width="280" height="200">
   </div>
    </div><br>
       <!-- <img src="image/cait.jpg" style="margin-left:50px;width:110%;"> -->

@@ -31,7 +31,7 @@ $(document).ready(function(){
     			   		$result=mysqli_query($con,$qr);
     			   		while($tt=mysqli_fetch_assoc($result))
     			   		{
-    			   			echo " <p class='bg-info text-white ' style='width:40%'>Major Guide: ".$tt['fname']."</p>";
+    			   			echo " <p class='bg-info text-white ' style='width:40%'>Minor Guide: ".$tt['fname']."</p>";
     			   		}
     			   ?>
     </div><br>
@@ -88,6 +88,7 @@ $(document).ready(function(){
 							        echo "Name: ".$name=$row['name']."<br>";
 							  		 echo " Email: ".$name=$row['email']."<br>";
 							        echo " Final Title: ".$name=$row['title']."<br>";
+							         echo "Language(framework): ".$name=$row['language']."<br>";
 							        echo " Final Title Description: ".$name=$row['title_decscription']."";
 							        echo "</div>";
 							}

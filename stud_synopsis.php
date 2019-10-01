@@ -16,6 +16,7 @@
 				$reg=$rw['reg_no'];
 				$name=$rw['name'];
 				$title=$rw['title'];
+				$lan=$rw['language'];
 				$tid=$rw['t_id'];
 			}
 			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
@@ -85,7 +86,7 @@
     </div>
 	</div><br>
 	<?php
-	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1";
+	$sql="SELECT * FROM remark INNER JOIN student ON student.reg_no=remark.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND remark.status=1";
 	$rs=mysqli_query($con,$sql);
 	if(mysqli_num_rows($rs)>0)
 	{
@@ -169,6 +170,10 @@
 	          					  <label for="title" class="col-form-label">Title:</label>
 	            					<input type="text" class="form-control" id="title" value="<?php echo $title;?>" name="title" readonly>
 	          				  </div>
+	          				   <div class="form-group">
+	          					  <label for="title" class="col-form-label">Language(framework):</label>
+	            					<input type="text" class="form-control" id="lan" value="<?php echo $lan;?>" name="lan" readonly>
+	          				  </div>
 	          				  <input type="hidden" name="hide" id="hide" value="<?php echo $tid;?>">
 	          				  <div class="form-group">
 	          					  <label for="recipient-name" class="col-form-label">Synopsis:</label>
@@ -211,6 +216,10 @@
 	          				  <div class="form-group">
 	          					  <label for="title" class="col-form-label">Title:</label>
 	            					<input type="text" class="form-control" id="title" value="<?php echo $title;?>" name="title" readonly>
+	          				  </div>
+	          				  <div class="form-group">
+	          					  <label for="title" class="col-form-label">Language(framework):</label>
+	            					<input type="text" class="form-control" id="lan" value="<?php echo $lan;?>" name="lan" readonly>
 	          				  </div>
 	          				  <input type="hidden" name="hide" id="hide" value="<?php echo $tid;?>">
 	          				  <div class="form-group">
