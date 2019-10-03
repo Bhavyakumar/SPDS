@@ -9,10 +9,18 @@
 			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
 			// echo $sql;
 			$rs=mysqli_query($con,$sql);
-			echo "<div id='printTable'>";
+			echo "<div id='printTable' >";
 			echo "<table align='center'>";
+			echo "<tr>";
+				echo "<td rowspan='4'>";
+				echo "<img src='image/logo.jpg' style='width:110px;hieght:110px'>";
+				echo "</td>";
+			echo "</tr>";
 				echo "<tr>";
 					echo "<td><b><font color='#fa661b' size='3px'>College Of Agricultural Information Technology</font></b></td>";
+					echo "<td rowspan='4'>";
+				echo "<img src='image/AIT.jpg'  style='width:110px;hieght:110px'>";
+				echo "</td>";
 				echo "</tr>";
 				echo "<tr>";
 					echo "<td align='center'><b><font color='#fa661b' size='3px'>AAU, Anand-388110</font></b></td>";
@@ -43,7 +51,7 @@
 				";
 			echo "<div class='col-lg-12'>";
 			echo "<span style='font-weight:bold;color:red'>Note: S= Satisfied And US= Unsatisfied</span>";
-			echo "<table class='table table-condensed ' >";
+			echo "<table border='1' cellpadding='1' class='table table-condensed ' style='width: 95%;' >";
 				echo "<tr>";
 					echo "<th>Registration No.: </th>";
 					echo "<th>Name: </th>";
@@ -69,7 +77,9 @@
 			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
 			// echo $sql;
 			$rs=mysqli_query($con,$sql);
-			echo "<table class='table table-condensed '>";
+
+			echo "<br></br>";
+			echo "<table border='1' cellpadding='1' class='table table-condensed ' style='width: 95%;'>";
 				echo "<tr>";
 					echo "<th>Email-Id: </th>";
 					echo "<th>Marks: </th>";	
@@ -101,17 +111,33 @@
 			}
 
 			echo "</table>";
+			echo "<table id='sign' style='display:none'>";
+				echo "<thead>";
+				echo "<tr>";
+					echo "<th>Major Guide :</th>";
+					echo "<th>Minor Guide :</th>";
+					echo "<th>Project Manager :</th>";
+				echo "</tr>";
+				echo "</thead>";
+				echo"<tbody>";
+				echo "<tr>";
+						echo "<td> ______________</td>";
+						echo "<td> ______________</td>";
+						echo "<td> ______________</td>";
+				echo "</tr>";
+				echo"</tbody>";
+			echo "</table>";
+			// echo "<p id='mj' style='display:none;margin-left:200px;'>Major Guide : </p><p style='display:none' id='mjs'>______________</p>";
+			// echo "<p id='mn'  style='display:none;margin-left:800px;'>Minor Guide :</p> <p style='display:none' id='mns'>______________</p>";
+			// echo "<p id='pm'  style='display:none;margin-left:800px;'>Project Manager : </p><p style='display:none's id='pms'>______________</p>";
 			echo "</div>";			
-
-
-			echo"				
-						</div>
+			echo"</div>
 					</div>";
-					
+						
 			echo"</div>";
 		echo "</div>";
 				  echo "<div class='input-group col-md-offset-9 col-md-6'>";
-					// echo "<input type='button' id='print_result' onclick='printDiv('print');' value='print a div!'/>";
+					echo "<input type='button' class='btn btn' id='print_result' onclick='printDiv('print');' value='Print'/>";
 				echo"</div><br>";
 	}
 	else
@@ -124,14 +150,34 @@
 <script type="text/javascript">
 function printData()
 {
-   var divToPrint=document.getElementById("printTable");
-   newWin= window.open("");
-   newWin.document.write(divToPrint.outerHTML);
-   newWin.print();
-   newWin.close();
+   // var divToPrint=document.getElementById("printTable");
+   // newWin= window.open('', 'PRINT', 'height=200,width=400');
+   // newWin.document.write(divToPrint.outerHTML);
+   // newWin.print();
+   // newWin.close();
+   var prtContent = document.getElementById("printTable");
+   var sign = document.getElementById("sign");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=600,height=400,toolbar=1,scrollbars=1,status=0');
+            WinPrint.document.write('<html><head><title></title></head>');
+            WinPrint.document.write('<body style="font-family:verdana; font-size:14px;width:100%;height:400px:" >');
+            WinPrint.document.write(prtContent.innerHTML);
+
+            WinPrint.document.write('<br></br>');
+             WinPrint.document.write(sign.innerHTML);
+            //WinPrint.document.write('Major Guide :________________').style.textAlign="left";
+            // WinPrint.document.write('Mainor Guide :________________').style.textAlign="right";
+            WinPrint.document.write('</body></html>');
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+            prtContent.innerHTML = "";
+
+
+
 }
 $('#print_result').on('click',function(){
-alert();
+// alert();
 printData();
 })
 </script>

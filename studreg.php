@@ -1,6 +1,7 @@
 <?php
   include 'webpage_header.php';
 ?>
+
 <script type="text/javascript">
     function ValidateReg() {
         var isValid = false;

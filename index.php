@@ -229,7 +229,7 @@
 		<div class="container" style="width:auto; border:1px solid #ccc;">  
                 <br />  
                 <p class="bg-primary text-white" style="background-color: red; ">Notice: </p>
-                  <marquee behavior="scroll" scrollamount=3 height=200px  direction="up" onmouseover="this.stop();" onmouseout="this.start();" > 
+                  <marquee behavior="scroll" scrollamount=2 height=200px  direction="up" onmouseover="this.stop();" onmouseout="this.start();" > 
                   
                  <?php
                       $qr=mysqli_query($con,"select * from semester");
@@ -288,7 +288,7 @@
                         <!--Body-->
                         <div class="md-form">
                           
-                            <p><img src="image/AIT.gif" class="img-rounded" alt="Cinque Terre" width="280" height="200"></p>
+                            <p><img src="image/AIT.jpg" class="img-rounded" alt="Cinque Terre" width="280" height="200"></p>
                         </div>
 
                       </div>
@@ -301,7 +301,7 @@
    <img src="image/CAIT.jpg" class="img-circle" alt="Cinque Terre" width="280" height="200">
  </div>
    <div class="col-lg-4 mb-4">
-    <img src="image/logo.png" class="img-rounded" alt="Cinque Terre" width="280" height="200">
+    <img src="image/logo.jpg" class="img-rounded" alt="Cinque Terre" width="280" height="200">
   </div>
    </div><br>
       <!-- <img src="image/cait.jpg" style="margin-left:50px;width:110%;"> -->
@@ -349,33 +349,8 @@
 
     </div>
     <div class="col-lg-7">
-
-      <!--Google map-->
-      <div id="map-container-google-11" class="z-depth-1-half map-container-6" style="height: 400px">
-        <div id="map"></div> 
-      <script> 
-      function initMap() { 
-        var uluru = {lat: 22.533718, lng: 72.970071}; 
-        var map = new google.maps.Map(document.getElementById('map'), { 
-          zoom: 4, 
-          center: uluru 
-        }); 
-        var marker = new google.maps.Marker({ 
-          position: uluru, 
-          map: map 
-        }); 
-      } 
-    </script> 
-    <style> 
-      #map { 
-        height: 350px; 
-        width: 100%; 
-       } 
-    </style> 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key= 
-      AIzaSyBVT2Yck5sYqDkIhv9xPy-Xl4ED_Afn-AU&callback=initMap"> 
-    </script> 
-      </div>
+    
+    <iframe src="http://maps.google.com/maps?q=22.533779, 72.970033&z=15&output=embed" width="100%" height="360" frameborder="0" style="border:0"></iframe>
 
   </div>
 </div>
