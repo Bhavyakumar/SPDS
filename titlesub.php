@@ -47,7 +47,7 @@ $(document).ready(function(){
 	?>
 	
 	<form name="add_name" id="add_name" action="titlesub_suc.php" method="POST">
-		
+			
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dynamic_field">
 							<tr>
@@ -66,11 +66,11 @@ $(document).ready(function(){
 	
 	</form>
 	<?php
-			$query="SELECT * FROM title where t_status=1 and reg_no='".$_SESSION['reg']."'";
+			$query="SELECT * FROM title where t_status=1 and reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 			$abc= mysqli_query($con,$query);
 			if(mysqli_num_rows($abc))
 			{
-				$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no where t_status=1 and student.reg_no='".$_SESSION['reg']."'";
+				$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no where t_status=1 and student.reg_no='".$_SESSION['reg']."' and title.sem_id='".$_SESSION['semid']."'";
 							// echo $sql;
 							$res=mysqli_query($con,$sql);
 							echo "<div class='toast col-sm-6' data-autohide='false'>";
@@ -81,6 +81,7 @@ $(document).ready(function(){
    										echo" <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' id='sub' aria-label='Close'>";
       										 echo"<span aria-hidden='true'>&times;</span>";
 										echo "</button>";
+										// echo $sid= $_SESSION['semid'];
 							  echo " </div>";
 							while($row = mysqli_fetch_assoc($res))
 							{
@@ -98,7 +99,7 @@ $(document).ready(function(){
 				else
 				{
 							// echo "<span style='font-weight:bold;color:red'>Final Title :</span>";
-							$qry="SELECT * FROM title where reg_no='".$_SESSION['reg']."'";
+							$qry="SELECT * FROM title where reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 							$result=mysqli_query($con,$qry);
 
 							echo "<table class='table table-striped table-bordered'>";

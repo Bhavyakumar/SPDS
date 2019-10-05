@@ -1,6 +1,6 @@
 <?php
 	include 'connection.php';
-if(isset($_POST['submit']))
+if(isset($_POST['Mark']))
 {
 	$aname=$_POST['activityname'];
 	$sub_date=$_POST['sub_date'];

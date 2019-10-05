@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2019 at 11:02 PM
+-- Generation Time: Oct 06, 2019 at 12:46 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -48,6 +48,27 @@ INSERT INTO `activity` (`a_id`, `sem_id`, `activity_name`, `submission_date`) VA
 (143, 3, 'Report Submission', '2019-11-27'),
 (144, 3, 'Project Presentation', '2019-12-06'),
 (145, 4, 'Report Submission', '2019-11-10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `Admin_id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`Admin_id`, `username`, `password`, `type`) VALUES
+(1, 'cait@aau.in', 'cait@aau.in', 'PM'),
+(2, 'clerkcait@aau.in', 'clerkcait@aau.in', 'Clerk');
 
 -- --------------------------------------------------------
 
@@ -184,16 +205,22 @@ INSERT INTO `minor_guide` (`minor_id`, `reg_no`, `f_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `project`
+-- Table structure for table `project_bank`
 --
 
-CREATE TABLE `project` (
+CREATE TABLE `project_bank` (
   `p_id` int(11) NOT NULL,
   `reg_no` varchar(20) NOT NULL,
-  `t_id` int(11) NOT NULL,
   `sub_date` date NOT NULL,
   `project` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project_bank`
+--
+
+INSERT INTO `project_bank` (`p_id`, `reg_no`, `sub_date`, `project`) VALUES
+(1, '06-0202-2016', '2019-10-06', 'Documents/Project/Untitled Document (1).pdf');
 
 -- --------------------------------------------------------
 
@@ -209,17 +236,18 @@ CREATE TABLE `remark` (
   `sub_id` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `re_remark` varchar(200) NOT NULL,
-  `sy_status` int(11) NOT NULL DEFAULT 0,
-  `re_status` int(11) DEFAULT NULL
+  `sy_status` int(11) DEFAULT NULL,
+  `re_status` int(11) DEFAULT NULL,
+  `sem_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `remark`
 --
 
-INSERT INTO `remark` (`r_id`, `reg_no`, `f_id`, `sy_remark`, `sub_id`, `status`, `re_remark`, `sy_status`, `re_status`) VALUES
-(57, '06-0202-2016', 29, 'No Not done.', 50, 0, '', 0, 0),
-(58, '06-0202-2016', 21, 'Yes', 50, 1, 'OK', 1, 1);
+INSERT INTO `remark` (`r_id`, `reg_no`, `f_id`, `sy_remark`, `sub_id`, `status`, `re_remark`, `sy_status`, `re_status`, `sem_id`) VALUES
+(57, '06-0202-2016', 29, 'No Not done.', 50, 0, '', 0, 0, 4),
+(58, '06-0202-2016', 21, 'Yes', 50, 1, 'OK', 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -322,18 +350,19 @@ CREATE TABLE `submission` (
   `report_date` date DEFAULT NULL,
   `sy_status` int(1) NOT NULL DEFAULT 0,
   `report_status` int(1) NOT NULL DEFAULT 0,
-  `show` int(11) NOT NULL DEFAULT 0
+  `show` int(11) NOT NULL DEFAULT 0,
+  `sem_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `submission`
 --
 
-INSERT INTO `submission` (`sub_id`, `reg_no`, `t_id`, `synopsis`, `report`, `synopsis_date`, `report_date`, `sy_status`, `report_status`, `show`) VALUES
-(48, '06-0248-2017', 119, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-19', '2019-09-19', 0, 0, 0),
-(49, '06-0249-2017', 113, 'Documents/Synopsis/footer.php', 'Documents/Report/cait.jpg', '2019-09-19', '2019-09-19', 0, 0, 0),
-(50, '06-0202-2016', 121, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-21', '2019-09-21', 1, 1, 0),
-(52, '06-0201-2016', 128, 'Documents/Synopsis/logo.jpg', 'Documents/Report/ait.jpg', '2019-09-21', '2019-09-21', 0, 0, 0);
+INSERT INTO `submission` (`sub_id`, `reg_no`, `t_id`, `synopsis`, `report`, `synopsis_date`, `report_date`, `sy_status`, `report_status`, `show`, `sem_id`) VALUES
+(48, '06-0248-2017', 119, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-19', '2019-09-19', 0, 0, 0, 3),
+(49, '06-0249-2017', 113, 'Documents/Synopsis/footer.php', 'Documents/Report/cait.jpg', '2019-09-19', '2019-09-19', 0, 0, 0, 3),
+(50, '06-0202-2016', 121, 'Documents/Synopsis/Datadictionary (1).xlsx', 'Documents/Report/Synopsisfinal.docx', '2019-09-21', '2019-09-21', 1, 1, 0, 4),
+(52, '06-0201-2016', 128, 'Documents/Synopsis/logo.jpg', 'Documents/Report/ait.jpg', '2019-09-21', '2019-09-21', 0, 0, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -345,22 +374,24 @@ CREATE TABLE `title` (
   `t_id` int(11) NOT NULL,
   `reg_no` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
+  `language` varchar(50) NOT NULL,
   `title_decscription` varchar(300) NOT NULL,
   `t_submit_date` date NOT NULL,
-  `t_status` int(1) NOT NULL DEFAULT 0
+  `t_status` int(1) NOT NULL DEFAULT 0,
+  `sem_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `title`
 --
 
-INSERT INTO `title` (`t_id`, `reg_no`, `title`, `title_decscription`, `t_submit_date`, `t_status`) VALUES
-(113, '06-0249-2017', 'Information and Management of Pest with  Prevention and Damage Control', 'Information and Management of Pest with  Prevention and Damage Control', '2019-09-19', 1),
-(119, '06-0248-2017', 'AgriNews', 'AgriNews', '2019-09-19', 1),
-(121, '06-0202-2016', 'SPDS', 'Student of AIT', '2019-09-19', 1),
-(126, '06-0218-2016', 'Dairy Hub', 'Dairy Hub', '2019-09-19', 1),
-(128, '06-0201-2016', 'Extention Education System', 'Extention Education System, AAU, Anand', '2019-09-21', 1),
-(132, '06-0231-2016', 'Contract Farming', 'Contract Farming for farmer and company', '2019-09-21', 1);
+INSERT INTO `title` (`t_id`, `reg_no`, `title`, `language`, `title_decscription`, `t_submit_date`, `t_status`, `sem_id`) VALUES
+(113, '06-0249-2017', 'Information and Management of Pest with  Prevention and Damage Control', 'Android', 'Information and Management of Pest with  Prevention and Damage Control', '2019-09-19', 1, 3),
+(119, '06-0248-2017', 'AgriNews', 'Java', 'AgriNews', '2019-09-19', 1, 3),
+(121, '06-0202-2016', 'SPDS', 'Core PHP', 'Student of AIT', '2019-09-19', 1, 4),
+(126, '06-0218-2016', 'Dairy Hub', 'JAVA', 'Dairy Hub', '2019-09-19', 1, 4),
+(128, '06-0201-2016', 'Extention Education System', 'ASP.NET', 'Extention Education System, AAU, Anand', '2019-09-21', 1, 4),
+(132, '06-0231-2016', 'Contract Farming', 'Core PHP', 'Contract Farming for farmer and company', '2019-09-21', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -387,6 +418,12 @@ CREATE TABLE `visit` (
 ALTER TABLE `activity`
   ADD PRIMARY KEY (`a_id`),
   ADD KEY `sem_id` (`sem_id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Admin_id`);
 
 --
 -- Indexes for table `department`
@@ -418,12 +455,11 @@ ALTER TABLE `minor_guide`
   ADD KEY `f_id` (`f_id`);
 
 --
--- Indexes for table `project`
+-- Indexes for table `project_bank`
 --
-ALTER TABLE `project`
+ALTER TABLE `project_bank`
   ADD PRIMARY KEY (`p_id`),
-  ADD KEY `reg_no` (`reg_no`),
-  ADD KEY `t_id` (`t_id`);
+  ADD KEY `reg_no` (`reg_no`);
 
 --
 -- Indexes for table `remark`
@@ -491,6 +527,12 @@ ALTER TABLE `activity`
   MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `Admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
@@ -515,126 +557,20 @@ ALTER TABLE `minor_guide`
   MODIFY `minor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
--- AUTO_INCREMENT for table `project`
+-- AUTO_INCREMENT for table `project_bank`
 --
-ALTER TABLE `project`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `remark`
---
-ALTER TABLE `remark`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
---
--- AUTO_INCREMENT for table `result`
---
-ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
-
---
--- AUTO_INCREMENT for table `semester`
---
-ALTER TABLE `semester`
-  MODIFY `sem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `submission`
---
-ALTER TABLE `submission`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT for table `title`
---
-ALTER TABLE `title`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
-
---
--- AUTO_INCREMENT for table `visit`
---
-ALTER TABLE `visit`
-  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `project_bank`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `activity`
+-- Constraints for table `project_bank`
 --
-ALTER TABLE `activity`
-  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`sem_id`) REFERENCES `semester` (`sem_id`);
-
---
--- Constraints for table `faculty`
---
-ALTER TABLE `faculty`
-  ADD CONSTRAINT `faculty_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `department` (`d_id`);
-
---
--- Constraints for table `major_guide`
---
-ALTER TABLE `major_guide`
-  ADD CONSTRAINT `major_guide_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `major_guide_ibfk_2` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`);
-
---
--- Constraints for table `minor_guide`
---
-ALTER TABLE `minor_guide`
-  ADD CONSTRAINT `minor_guide_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `minor_guide_ibfk_2` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`);
-
---
--- Constraints for table `project`
---
-ALTER TABLE `project`
-  ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `project_ibfk_3` FOREIGN KEY (`t_id`) REFERENCES `title` (`t_id`);
-
---
--- Constraints for table `remark`
---
-ALTER TABLE `remark`
-  ADD CONSTRAINT `remark_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `remark_ibfk_2` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`),
-  ADD CONSTRAINT `remark_ibfk_3` FOREIGN KEY (`sub_id`) REFERENCES `submission` (`sub_id`);
-
---
--- Constraints for table `result`
---
-ALTER TABLE `result`
-  ADD CONSTRAINT `result_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `result_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `title` (`t_id`),
-  ADD CONSTRAINT `result_ibfk_3` FOREIGN KEY (`sub_id`) REFERENCES `submission` (`sub_id`),
-  ADD CONSTRAINT `result_ibfk_4` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`);
-
---
--- Constraints for table `student`
---
-ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`sem_id`) REFERENCES `semester` (`sem_id`);
-
---
--- Constraints for table `submission`
---
-ALTER TABLE `submission`
-  ADD CONSTRAINT `submission_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `submission_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `title` (`t_id`);
-
---
--- Constraints for table `title`
---
-ALTER TABLE `title`
-  ADD CONSTRAINT `title_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`);
-
---
--- Constraints for table `visit`
---
-ALTER TABLE `visit`
-  ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`),
-  ADD CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`);
+ALTER TABLE `project_bank`
+  ADD CONSTRAINT `project_bank_ibfk_1` FOREIGN KEY (`reg_no`) REFERENCES `student` (`reg_no`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

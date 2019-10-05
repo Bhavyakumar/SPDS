@@ -8,7 +8,11 @@
         var regex = /^[0-9-+()]*$/;
         isValid = regex.test(document.getElementById("rno").value);
         document.getElementById("spnErrorReg").style.display = !isValid ? "block" : "none";
+       
+        // alert(idValid);
         return isValid;
+       // document.getElementById("rno").value = "";
+        // isValid.empty();  
     }
      function ValidateName() {
         var isValid = false;
@@ -38,10 +42,21 @@
         document.getElementById("spnErrorPwd").style.display = !isValid ? "block" : "none";
         return isValid;
     }
+   function validateForm() {
+    if( ( $("#spnErrorReg").css('display') == 'none' || $("#spnErrorReg").css("visibility") == "hidden")&&( $("#spnErrorName").css('display') == 'none' || $("#spnErrorName").css("visibility") == "hidden")&&( $("#spnErrorRoll").css('display') == 'none' || $("#spnErrorRoll").css("visibility") == "hidden")&&( $("#spnErrorPhn").css('display') == 'none' || $("#spnErrorPhn").css("visibility") == "hidden")&&( $("#spnErrorPwd").css('display') == 'none' || $("#spnErrorPwd").css("visibility") == "hidden"))
+    {
+
+    }
+    else
+    {
+      return false;
+    }
+
+  }
     
 </script>
  <div class="col-sm-12">
-<form action="studreg_suc.php" method="POST">
+<form action="studreg_suc.php" name="myForm" method="POST">
   <div class="form-row">
   	
   	
@@ -50,8 +65,8 @@
     </div> 
     <div class="form-group col-md-6">
       <label for="rno">Registration No.</label>
-      <input type="text" class="form-control" maxlength="15" id="rno" name="rno" onchange="return ValidateReg(this)" placeholder="Registration No." required title="Maximum 15 Digits And only Numeric values are allowed.">
       <span id="spnErrorReg" style="color: Red; display: none">*Valid characters: Numbers,special characters And 15 digits are allowed.</span>
+      <input type="text" class="form-control" maxlength="15" id="rno" name="rno" onchange="return ValidateReg(this)" placeholder="Registration No." required title="Maximum 15 Digits And only Numeric values are allowed.">
     </div>  
     <div class="form-group col-md-6">
       <label for="sname">Name</label>
@@ -81,7 +96,7 @@
 
   <div class="form-group col-md-6">
       <label for="sphone">Phone No.</label>
-      <input type="text" class="form-control" id="sphone" name="sphone" onchange="return ValidatePhn(this)" placeholder="Phone No." required>
+      <input type="text" class="form-control" id="sphone" name="sphone" onchange="return ValidatePhn(this)" placeholder="Phone No." maxlength="15" required>
       <span id="spnErrorPhn" style="color: Red; display: none">*Valid characters: Numbers only, 10 Digits are allowed And Number is an Indian Number allowed.</span>
   </div>
   <div class="form-group col-md-6">
@@ -95,7 +110,7 @@
     <span id="spnErrorPwd" style="color: Red; display: none">*At least 1 lowercase alphabetical character,1 uppercase alphabetical character, 1 numeric character, one special character And string must be eight characters or longer </span>
   </div>
   
-  <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" name="submit" id="submit" class="btn btn-primary" onclick="return validateForm();">Submit</button>
 </form><br>
 </div>
 

@@ -5,6 +5,24 @@
   $(document).ready(function() {
        $("#example").DataTable();
 });
+   function ValidateDept() {
+        var isValid = false;
+        var regex = /^[a-zA-Z ]+$/;
+        isValid = regex.test(document.getElementById("dept_name").value);
+        document.getElementById("spnErrorDept").style.display = !isValid ? "block" : "none";
+        return isValid;
+    }
+    function validateForm() {
+    if(( $("#spnErrorDept").css('display') == 'none' || $("#spnErrorDept").css("visibility") == "hidden"))
+    {
+
+    }
+    else
+    {
+      return false;
+    }
+
+  }
 </script>
 <div class="col-sm-12">
 <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-5 col-sm-8">                    
@@ -28,13 +46,14 @@
                                     
                       <div class="form-group blue-border">
                           <label for="dept_name">Department Name</label>
-                          <textarea class="form-control" id="dept_name" name="dept_name" rows="1" required></textarea>
+                          <textarea class="form-control" id="dept_name" name="dept_name" maxlength="100" rows="1" onchange="return ValidateDept(this);" title="Valid characters: alphabetical only And maximum 100 characters are   allowed." required></textarea>
+                          <span id="spnErrorDept" style="color: Red; display: none">*Valid characters: alphabetical only And maximum 100 characters are allowed.</span>
                      </div>
 
                       <br>
                       
                       <div>
-                        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit">
+                        <input type="submit" name="submit" id="submit" onclick="return validateForm();" class="btn btn-info" value="Submit">
                       </div>
              </form>
            </div>   

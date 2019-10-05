@@ -6,7 +6,7 @@
 
 	<?php
 	include 'connection.php';
-	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1";
+	$sql="SELECT * FROM title INNER JOIN student ON student.reg_no=title.reg_no WHERE student.reg_no='".$_SESSION['reg']."' AND title.t_status=1 and title.sem_id='".$_SESSION['semid']."'";
 	// echo $sql;
 	$rs=mysqli_query($con,$sql);
 	if(mysqli_num_rows($rs)>0)
@@ -18,6 +18,7 @@
 				$title=$rw['title'];
 				$lan=$rw['language'];
 				$tid=$rw['t_id'];
+				$sid=$rw['sem_id'];
 			}
 			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
 			$rem=mysqli_query($con,$query);
@@ -174,7 +175,8 @@
 	          					  <label for="title" class="col-form-label">Language(framework):</label>
 	            					<input type="text" class="form-control" id="lan" value="<?php echo $lan;?>" name="lan" readonly>
 	          				  </div>
-	          				  <input type="hidden" name="hide" id="hide" value="<?php echo $tid;?>">
+	          				  <input type="hidden" name="sid" id="sid" value="<?php echo $sid;?>">
+	          				    <input type="hidden" name="hide" id="hide" value="<?php echo $tid;?>">
 	          				  <div class="form-group">
 	          					  <label for="recipient-name" class="col-form-label">Synopsis:</label>
 	            					<input type="file" class="form-control" name="myfile">
@@ -222,6 +224,7 @@
 	            					<input type="text" class="form-control" id="lan" value="<?php echo $lan;?>" name="lan" readonly>
 	          				  </div>
 	          				  <input type="hidden" name="hide" id="hide" value="<?php echo $tid;?>">
+	          				   <input type="hidden" name="sid" id="sid" value="<?php echo $sid;?>">
 	          				  <div class="form-group">
 	          					  <label for="recipient-name" class="col-form-label">Report:</label>
 	            					<input type="file" class="form-control" name="report">
@@ -265,14 +268,14 @@
 		  //               		echo "</tr>";	
 		  //               }
 		  //       echo "</table>";
-		   	$qr="SELECT * FROM submission where sy_status=0 ";
+		   	$qr="SELECT * FROM submission INNER JOIN title on title.t_id=submission.t_id where sy_status=0 and title.sem_id='".$_SESSION['semid']."'";
 			$abc= mysqli_query($con,$qr);
 			if(mysqli_num_rows($abc))
 			{
 							echo "<div class='panel-heading'>
 						        <div class='panel-title'><h4><b>Synopsis</b></h4></div>
 						    </div>";
-							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."'";
+							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 							$result=mysqli_query($con,$qry);
 							echo "<table class='table table-striped table-bordered'>";
 								echo "<tbody>";
@@ -305,14 +308,14 @@
 								}
 								echo "</table>";
 			}
-			$query="SELECT * FROM submission where report_status=0";
+			$query="SELECT * FROM submission INNER JOIN title on title.t_id=submission.t_id where report_status=0 and title.sem_id='".$_SESSION['semid']."'";
 			$abc= mysqli_query($con,$query);
 			if(mysqli_num_rows($abc))
 			{
 				echo "<div class='panel-heading'>
 						        <div class='panel-title'><h4><b>Report</b></h4></div>
 						    </div>";
-							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."'";
+							$qry="SELECT * FROM submission where reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 							$result=mysqli_query($con,$qry);
 							echo "<table class='table table-striped table-bordered'>";
 								echo "<tbody>";
@@ -348,7 +351,8 @@
 			echo  '<div class="panel-heading">
        				 <div class="panel-title"><h4><b>Remarks</b></h4></div>
     				</div>';
-    		$qry="SELECT * FROM remark INNER JOIN faculty ON faculty.f_id=remark.f_id INNER JOIN student ON student.reg_no=remark.reg_no where remark.reg_no='". $_SESSION['reg']."' AND status=1";
+    		$qry="SELECT * FROM remark INNER JOIN faculty ON faculty.f_id=remark.f_id INNER JOIN student ON student.reg_no=remark.reg_no where remark.reg_no='". $_SESSION['reg']."' AND status=1 and remark.sem_id='".$_SESSION['semid']."'";
+    		// echo $qry;
     		$result=mysqli_query($con,$qry);
     			echo "<table border=1 class='table table-bordered'>";
 		           		echo "<tr>";

@@ -51,7 +51,7 @@
 				";
 			echo "<div class='col-lg-12'>";
 			echo "<span style='font-weight:bold;color:red'>Note: S= Satisfied And US= Unsatisfied</span>";
-			echo "<table border='1' cellpadding='1' class='table table-condensed ' style='width: 95%;' >";
+			echo "<table border='1' cellpadding='1' class='table table-bordered ' style='width: 95%;' >";
 				echo "<tr>";
 					echo "<th>Registration No.: </th>";
 					echo "<th>Name: </th>";
@@ -74,12 +74,35 @@
 				echo "</tr>";
 			}
 			echo "</table>";
+			$qry="SELECT * FROM result INNER JOIN title ON title.t_id=result.t_id WHERE result.reg_no='".$_SESSION['reg']."' group by result.reg_no";
+			// echo $qry;
+			$result=mysqli_query($con,$qry);
+			echo "<br></br>";
+			echo "<table border='1' cellpadding='1' class='table table-bordered ' style='width: 95%;' >";
+				echo "<tr>";
+					echo "<th>Title: </th>";
+					echo "<th>Language(framework): </th>";
+				echo "</tr>";
+			while ($tt=mysqli_fetch_assoc($result)) 
+			{
+				echo "<tr>";
+				// echo $row['reg_no'];
+				// echo $row['AVG(total)'];
+
+				echo "<td>".$tt['title']."</td>";
+				echo "<td>".$tt['language']."</td>";
+				// echo $row['email'];
+				// echo $row['roll_no'];
+				// echo $row['semester'];
+				echo "</tr>";
+			}
+			echo "</table>";
 			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
 			// echo $sql;
 			$rs=mysqli_query($con,$sql);
 
 			echo "<br></br>";
-			echo "<table border='1' cellpadding='1' class='table table-condensed ' style='width: 95%;'>";
+			echo "<table border='1' cellpadding='1' class='table table-bordered ' style='width: 95%;'>";
 				echo "<tr>";
 					echo "<th>Email-Id: </th>";
 					echo "<th>Marks: </th>";	
@@ -111,8 +134,9 @@
 			}
 
 			echo "</table>";
-			echo "<table id='sign' style='display:none'>";
-				echo "<thead>";
+			echo "<br></br>";
+			echo "<table cellpadding='1' class='table table-bordered' style='width: 95%;'>";
+				echo "<thead >";
 				echo "<tr>";
 					echo "<th>Major Guide :</th>";
 					echo "<th>Minor Guide :</th>";
@@ -121,9 +145,9 @@
 				echo "</thead>";
 				echo"<tbody>";
 				echo "<tr>";
-						echo "<td> ______________</td>";
-						echo "<td> ______________</td>";
-						echo "<td> ______________</td>";
+						echo "<td align='center'><br> ______________</td>";
+						echo "<td align='center'><br>______________</td>";
+						echo "<td align='center'><br> ______________</td>";
 				echo "</tr>";
 				echo"</tbody>";
 			echo "</table>";
@@ -137,7 +161,7 @@
 			echo"</div>";
 		echo "</div>";
 				  echo "<div class='input-group col-md-offset-9 col-md-6'>";
-					echo "<input type='button' class='btn btn' id='print_result' onclick='printDiv('print');' value='Print'/>";
+					echo "<button type='button' class='btn btn-success hidden-print' id='print_result' onclick='printDiv('print');'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> Print</button>";
 				echo"</div><br>";
 	}
 	else
@@ -156,14 +180,12 @@ function printData()
    // newWin.print();
    // newWin.close();
    var prtContent = document.getElementById("printTable");
-   var sign = document.getElementById("sign");
+   // var sign = document.getElementById("sign");
             var WinPrint = window.open('', '', 'left=0,top=0,width=600,height=400,toolbar=1,scrollbars=1,status=0');
+             WinPrint.document.write('<br></br>');
             WinPrint.document.write('<html><head><title></title></head>');
             WinPrint.document.write('<body style="font-family:verdana; font-size:14px;width:100%;height:400px:" >');
             WinPrint.document.write(prtContent.innerHTML);
-
-            WinPrint.document.write('<br></br>');
-             WinPrint.document.write(sign.innerHTML);
             //WinPrint.document.write('Major Guide :________________').style.textAlign="left";
             // WinPrint.document.write('Mainor Guide :________________').style.textAlign="right";
             WinPrint.document.write('</body></html>');
@@ -172,12 +194,12 @@ function printData()
             WinPrint.print();
             WinPrint.close();
             prtContent.innerHTML = "";
-
+            document.location.href = "fetch_result.php"; 
 
 
 }
 $('#print_result').on('click',function(){
 // alert();
-printData();
+	printData();
 })
 </script>

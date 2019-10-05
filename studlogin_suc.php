@@ -16,6 +16,7 @@
               session_start();
               $_SESSION["stud"]=$suname;
               $_SESSION['reg']=$row['reg_no'];
+              $_SESSION['semid']=$row['sem_id'];
               $cnt++;
               header('location:index.php');
       		}        

@@ -131,10 +131,10 @@
           </ul><br>
     </div>
     <div class="col-sm-10" style="background-color: #f1f1f1; height: 50px;">
-           <h2><b>Student Project Distribution System</b></h2>
+           <h2><b>Student Project Distribution System for CAIT</b></h2>
     </div>
-     <div class="collapse navbar-collapse col-sm-10" id="myNavbar">
-          <ul class="nav navbar-nav">
+     <!-- <div class="collapse navbar-collapse col-sm-10" id="myNavbar"> -->
+          <ul class="nav navbar-nav col-sm-8">
             <?php
            
                 if(isset($_SESSION['type']))
@@ -190,7 +190,6 @@
             <!-- <li><a href="#">Projects</a></li> -->
             <!-- <li><a href="#">Contact</a></li> -->
           </ul>
-          <div style="margin-left: 1030px;">
           <ul class="nav navbar-nav navbar-right " >
             <?php
             
@@ -215,8 +214,7 @@
               ';
             }
             ?>
-          </ul> </div>
-     </div>
+          </ul>
      <div class="col-sm-10">
 <?php
 	// include 'webpage_header.php';

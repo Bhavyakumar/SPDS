@@ -7,7 +7,7 @@
 			echo"<div class='panel-title'><h3>Recent Projects</h3></div>";
 	    echo "</div>";
 	
-			$sql = "SELECT * FROM project INNER JOIN student ON student.reg_no=project.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id INNER JOIN title ON title.t_id=project.t_id";
+			$sql = "SELECT * FROM project_bank INNER JOIN student ON student.reg_no=project_bank.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id INNER JOIN title ON title.reg_no=project_bank.reg_no";
 			if($rs=mysqli_query($con,$sql))
 			{
 				if(mysqli_num_rows($rs) > 0)

@@ -2,7 +2,7 @@
   include 'webpage_header.php';
  ?>
 <div class="col-sm-12" id="section3">
-     <h3 class="section-heading h1 pt-4">Contact us</h3>
+     <h3 class="section-heading h2 pt-4">Contact us</h3>
            <div class="row">
 <?php
   echo "<br>";
@@ -55,32 +55,7 @@
     <div class="col-lg-7">
 
       <!--Google map-->
-      <div id="map-container-google-11" class="z-depth-1-half map-container-6" style="height: 400px">
-        <div id="map"></div> 
-      <script> 
-      function initMap() { 
-        var uluru = {lat: 22.533718, lng: 72.970071}; 
-        var map = new google.maps.Map(document.getElementById('map'), { 
-          zoom: 4, 
-          center: uluru 
-        }); 
-        var marker = new google.maps.Marker({ 
-          position: uluru, 
-          map: map 
-        }); 
-      } 
-    </script> 
-    <style> 
-      #map { 
-        height: 350px; 
-        width: 100%; 
-       } 
-    </style> 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key= 
-      AIzaSyBVT2Yck5sYqDkIhv9xPy-Xl4ED_Afn-AU&callback=initMap"> 
-    </script> 
-      </div>
-
+    <iframe src="http://maps.google.com/maps?q=22.533779, 72.970033&z=15&output=embed" width="100%" height="360" frameborder="0" style="border:0"></iframe>
   </div>
 </div>
 </div>	

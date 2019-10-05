@@ -15,7 +15,7 @@ if(isset($_POST['submit']))
 	{
 		$location="Documents/Project/$name";
 		move_uploaded_file($tmp_file,$location);
-		$qry="insert into project(reg_no,t_id,sub_date,project) values ('$reg','$tid','$subdate','$location')";
+		$qry="insert into project_bank(reg_no,sub_date,project) values ('$reg','$subdate','$location')";
 		//echo $qry;
 		mysqli_query($con,$qry);
 		header('Location:project_uploadation.php?err');

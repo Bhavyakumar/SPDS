@@ -1,6 +1,35 @@
 <?php
   include 'webpage_header.php';
 ?>
+<script type="text/javascript">
+  function checkDate() {
+   var selectedText = document.getElementById('sub_date').value;
+   var selectedDate = new Date(selectedText);
+   var now = new Date();
+   if (selectedDate < now) {
+       alert("Date must be in the future");
+       document.getElementById("sub_date").value = "";
+   }
+ }
+ function ValidateActivity() {
+        var isValid = false;
+        var regex = /^[a-zA-Z ]+$/;
+        isValid = regex.test(document.getElementById("activityname").value);
+        document.getElementById("spnErrorActivity").style.display = !isValid ? "block" : "none";
+        return isValid;
+    }
+     function validateForm() {
+    if(( $("#spnErrorActivity").css('display') == 'none' || $("#spnErrorActivity").css("visibility") == "hidden"))
+    {
+
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+</script>
 <div class="col-sm-12">
 <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-5 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
         <div class="panel panel-info" >
@@ -23,7 +52,7 @@
                        <div class="form-group col-md-6">
                               <label for="sem">Semester</label>
                               <select id="sem" name="sem" class="form-control" required>
-                                <option selected>Select Semester</option>
+                                <option value="">Select Semester</option>
                                  <?php
                                     include 'connection.php';
                                     $qry="select * from semester";
@@ -34,16 +63,17 @@
                                     }
                                 ?>
                               </select>
-                            </div> 
+                        </div>
                       <div class="input-group col-md-6">
                         <label for="sub_date">Submission Date</label>
-                        <input type="date" class="form-control" id="sub_date" name="sub_date" required>
+                        <input type="date" class="form-control" id="sub_date" name="sub_date" onchange="checkDate()" required>
                       </div>  
                       <input type="hidden" name="hide" id="aid">
                       <br>
                       <div class="input-group col-md-12">
                         <label for="activityname ">Activity name</label>
-                        <input type="text" class="form-control" name="activityname" id="activityname" placeholder="Activity name" required>
+                        <input type="text" class="form-control" name="activityname" id="activityname" placeholder="Activity name" maxlength="50" onchange="return ValidateActivity(this)" required>
+                        <span id="spnErrorActivity" style="color: Red; display: none">*Valid characters: alphabetical only And maximum 50 characters are allowed.</span>
                       </div><br>
                       <div>
                         <input type="submit" name="Mark" id="Mark" class="btn btn-info submit" value="Submit">

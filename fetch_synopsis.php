@@ -59,7 +59,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Synopsis(Download)</th>";
 							echo "<th>Remarks</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."'  AND sy_status=0 order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no where submission.sem_id='".$sem."' AND f_id='".$_SESSION['fid']."'  AND sy_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -171,7 +171,8 @@ if($_SESSION['type']=='Minor')
 		      	</div>
 		      			 <input type="hidden" class="form-control" id="reg_no" name="regno" >
 						  <input type="hidden" class="form-control" id="sub_id" name="subid">
-       
+						   <!-- <input type="text" class="form-control" id="s_id" name="sid"> -->
+      
           </div>
        
         <!-- Modal footer -->
@@ -211,7 +212,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Finalization of Synopsis</th>";
 
 						echo "</tr>";
-			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' AND sy_status=0 order by student.reg_no";
+			$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.t_id=submission.t_id INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where submission.sem_id='".$sem."' AND f_id='".$_SESSION['fid']."' AND sy_status=0 order by student.reg_no";
 			 // echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -257,7 +258,7 @@ if($_SESSION['type']=='Major')
 						}
 					echo "<td><a href='Sy_download.php?id=".$row["sub_id"]."' style=' color:green'><button class='btn' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 					
-					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
+					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."'  id='".$row["sub_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
 			// 		echo "<td><button  type='submit' id='submit' name='download' class='btn btn-primary'><span class='glyphicon glyphicon-download-alt'></span>	</button></td>";
 					echo "<td align='center'><a href='sy_finalize.php?id=".$row["sub_id"]."' style=' color:green'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></a></td>";
 			 }
@@ -276,12 +277,15 @@ if($_SESSION['type']=='Major')
 $(".submitButtonremark").click(function(e){
 	var sub_id = $(this).attr("modalid");
 	var reg_no = $(this).attr("reg_no");
+
+	//alert(sid);
 	console.log(e);
 	$.ajax({
                 url: "getRemark.php",
                 type: "GET",
                 data: {
-                    "sid":reg_no
+                    
+                    "sid":reg_no,
                 },
 
                 success: function(data) {
@@ -299,16 +303,19 @@ $(".submitButtonremark").click(function(e){
 $(".Majorremark").click(function(e){
 	var sub_id = $(this).attr("modalid");
 	var reg_no = $(this).attr("reg_no");
-	// 	alert(sub_id);
+	// var sid = $(this).attr("semid");
+		// alert(sub_id);
 	console.log(e);
 	$.ajax({
                 url: "getMajRemark.php",
                 type: "GET",
                 data: {
-                    "sid":reg_no
+                    // "sid":sid
+                    "reg":reg_no,
                 },
 
                 success: function(data) {
+                     //alert(data);
                      console.log(data);
                     $('#majrem').val(data);
                 },
@@ -319,6 +326,9 @@ $(".Majorremark").click(function(e){
             });
 	$('#sub_id').val(sub_id);
 	$('#reg_no').val(reg_no);
+	// $('#s_id').val(sid);
+	// alert(sid);
+
 });
 </script>
 <?php

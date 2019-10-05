@@ -56,7 +56,7 @@ if($_SESSION['type']=='Minor')
 							echo "<th>Language(framework)</th>";
 							echo "<th>Title description</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=title.reg_no where sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
+			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=title.reg_no where title.sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
 			// echo $sql;
 			$rs= mysqli_query($con,$sql);
 			
@@ -85,7 +85,15 @@ if($_SESSION['type']=='Minor')
 					}
 					else
 					{
-						echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+						if($row['t_status']=='1')
+						{
+							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."<img src='image/select.gif' style='width:40px;'></td>";
+							
+						}
+						else
+						{
+							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+						}
 					}
 					// else
 					// {
@@ -120,7 +128,7 @@ if($_SESSION['type']=='Major')
 							echo "<th>Language(framework)</th>";
 							echo "<th>Title description</th>";
 						echo "</tr>";
-			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN major_guide ON major_guide.reg_no=title.reg_no where sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
+			$sql="SELECT * FROM title INNER JOIN student ON student.reg_no = title.reg_no INNER JOIN major_guide ON major_guide.reg_no=title.reg_no where title.sem_id=".$sem." AND f_id='".$_SESSION["fid"]."' order by student.reg_no";
 			// echo $sql;
 			$rs= mysqli_query($con,$sql);
 			$arr=[];

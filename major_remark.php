@@ -4,6 +4,7 @@ session_start();
 			$reg=$_POST["regno"];
 			$subid=$_POST["subid"];
 			$fid=$_SESSION["fid"];
+			$sid=$_SESSION["semid"];
 			$remark=$_POST["majremark"];
 						$query="SELECT * from remark where sub_id='".$subid."' and f_id='".$fid."'";
 						 echo $query;
@@ -23,7 +24,7 @@ session_start();
 						}
 						else
 						{
-							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id,status) values ('$reg','$fid','$remark','$subid',1)";
+							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id,status,sem_id) values ('$reg','$fid','$remark','$subid',1,'$sid')";
 							echo "$qry";
 							$rs=mysqli_query($con,$qry);
 							if($rs)
