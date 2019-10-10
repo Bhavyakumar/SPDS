@@ -6,6 +6,7 @@
 				$reg=$_POST["regno"];
 				$fid=$_SESSION['fid'];
 				$subid=$_POST['subid'];	
+				$sid=$_POST["sid"];
 				$remark=$_POST['majremark']; 
 						$query="SELECT * from remark where sub_id='".$subid."' and status=1" ;
 						// echo $query;
@@ -30,11 +31,11 @@
 							$rs=mysqli_query($con,$qry);
 							if($rs)
 							{
-								header('location:fetch_report.php?err');
+								//header('location:fetch_report.php?err');
 							}
 							else
 							{
-								header('location:fetch_report.php?arr');
+								//header('location:fetch_report.php?arr');
 							}
 						}
 		

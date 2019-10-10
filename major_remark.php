@@ -4,14 +4,14 @@ session_start();
 			$reg=$_POST["regno"];
 			$subid=$_POST["subid"];
 			$fid=$_SESSION["fid"];
-			$sid=$_SESSION["semid"];
+			$sid=$_POST["sid"];
 			$remark=$_POST["majremark"];
-						$query="SELECT * from remark where sub_id='".$subid."' and f_id='".$fid."'";
-						 echo $query;
+						$query="SELECT * from remark where sub_id='".$subid."' and f_id='".$fid."' and sem_id='".$sid."'";
+						 // echo $query;
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>=1)
 						{
-							$rem="update remark set sy_remark='".$remark."',sy_status=0 where sub_id='".$subid."' and status=1	";
+							$rem="update remark set sy_remark='".$remark."',sy_status=0 where sub_id='".$subid."' and status=1 and sem_id='".$sid."'";
 							$uprem=mysqli_query($con,$rem);
 							if($uprem)
 							{

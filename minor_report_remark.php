@@ -7,7 +7,7 @@
 				$fid=$_SESSION['fid'];
 				$subid=$_POST['sub'];	
 				$remark=$_POST['remark']; 
-						$query="SELECT * from remark where sub_id=".$subid;
+						$query="SELECT * from remark where sub_id='".$subid."' and status=0" ;
 						// echo $query;
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>=1)

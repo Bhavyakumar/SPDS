@@ -91,7 +91,7 @@ if($_SESSION['type']=='Minor')
 					echo "<td><b>".$newDate."<b></td>";
 					echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style='color:green'><button class='btn margin-top' style=' background-color: DodgerBlue;color: white; '><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 
-					 echo "<td><button class='btn submitButtonremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#remark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
+					 echo "<td><button class='btn submitButtonremark' reg_no='".$row["reg_no"]."'  modalid='".$row["sub_id"]."' smid='".$row["sem_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#remark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span> Remarks</button></td>";
 
 
 
@@ -130,6 +130,8 @@ if($_SESSION['type']=='Minor')
 		      	</div>
 		      			 <input type="hidden" class="form-control" id="reg" name="reg" >
 						  <input type="hidden" class="form-control" id="sub" name="sub">
+						  	   <input type="hidden" class="form-control" id="semesterid" name="sid">
+       
        
           </div>
        
@@ -147,43 +149,41 @@ if($_SESSION['type']=='Minor')
   </div>
 <!-- For Major Guide -->
 <div class="modal" id="Majremark">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
+	<div class="modal-dialog">
+		<div class="modal-content">
 
-        <div class="modal-header">
-          <h4 class="modal-title">Remarks</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
+			<!-- Modal Header -->
 
-        <div class="modal-body">
-        <form action='major_report_remark.php' method='POST' id="target">
+			<div class="modal-header">
+				<h4 class="modal-title">Remarks</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
 
-	           <div class="form-group">
-						  <label for="remark" class="col-form-label">Remark :</label>
-						  <textarea class="form-control" id="majrem" name="majremark"></textarea required>
-						 
-		      	</div>
-		      			 <input type="hidden" class="form-control" id="reg_no" name="regno" >
-						  <input type="hidden" class="form-control" id="sub_id" name="subid">
-       
-          </div>
-       
-        <!-- Modal footer -->
-		        <div class="modal-footer">
-		        	<input type="submit" class="btn btn-primary" name="Send" value="Submit"/>		
-		         	 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-		        </div>
-		    </form>
-		      
-   		
-        
-      </div>
-    </div>
-  </div>
+			<!-- Modal body -->
+
+			<div class="modal-body">
+				<form action='major_report_remark.php' method='POST' id="target">
+
+					<div class="form-group">
+						<label for="remark" class="col-form-label">Remark :</label>
+						<textarea class="form-control" id="majrem" name="majremark"></textarea required>
+
+						</div>
+						<input type="text" class="form-control" id="reg_no" name="regno" >
+						<input type="text" class="form-control" id="sub_id" name="subid">
+						<input type="text" class="form-control" id="s_id" name="sid">
+
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary" name="Send" value="Submit"/>		
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 <?php
 if($_SESSION['type']=='Major')
 {
@@ -254,7 +254,7 @@ if($_SESSION['type']=='Major')
 						}
 					echo "<td><a href='Re_download.php?id=".$row["sub_id"]."' style=' color:green'><button class='btn' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-download-alt'></span> Download</button></a></td>";
 					
-					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span>Remarks</button></td>";
+					echo "<td><button class='btn Majorremark' reg_no='".$row["reg_no"]."' modalid='".$row["sub_id"]."' id='".$row["sub_id"]."' semid='".$row["sem_id"]."' data-toggle='modal' data-target='#Majremark' name='remark' style=' background-color: DodgerBlue;color: white;'><span class='glyphicon glyphicon-share'></span>Remarks</button></td>";
 			// 		echo "<td><button  type='submit' id='submit' name='download' class='btn btn-primary'><span class='glyphicon glyphicon-download-alt'></span>	</button></td>";
 					echo "<td align='center'><a href='re_finalize.php?id=".$row["sub_id"]."' style=' color:green'><button  type='submit' id='submit' name='accept' class='btn btn-primary' onclick='return check();'><span class='glyphicon glyphicon-ok'></span></button></a></td>";
 			 }
@@ -273,12 +273,15 @@ if($_SESSION['type']=='Major')
 $(".submitButtonremark").click(function(e){
 	var sub_id = $(this).attr("modalid");
 	var reg_no = $(this).attr("reg_no");
+	var smid = $(this).attr("smid");
 	console.log(e);
 	$.ajax({
                 url: "getreportRemark.php",
                 type: "GET",
                 data: {
-                    "sid":reg_no
+                    "reg":reg_no
+                   "smid":smid, 
+
                 },
 
                 success: function(data) {
@@ -292,17 +295,22 @@ $(".submitButtonremark").click(function(e){
             });
 	$('#sub').val(sub_id);
 	$('#reg').val(reg_no);
+	$('#semesterid').val(smid);
 });
-$(".Majorremark").click(function(e){
+
+$(document).on("click",".Majorremark",function(e) {
+
 	var sub_id = $(this).attr("modalid");
 	var reg_no = $(this).attr("reg_no");
-	// 	alert(sub_id);
+	var seid = $(this).attr("semid");
+	alert(sub_id);
 	console.log(e);
 	$.ajax({
                 url: "getmaj_remark_report.php",
                 type: "GET",
                 data: {
-                    "sid":reg_no
+                	"seid":seid,
+                    "sid":reg_no,
                 },
 
                 success: function(data) {
@@ -316,6 +324,7 @@ $(".Majorremark").click(function(e){
             });
 	$('#sub_id').val(sub_id);
 	$('#reg_no').val(reg_no);
+	$('#s_id').val(sid);
 });
 </script>
 <?php
