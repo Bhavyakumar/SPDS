@@ -8,7 +8,7 @@
 				$subid=$_POST['subid'];	
 				$sid=$_POST["sid"];
 				$remark=$_POST['majremark']; 
-						$query="SELECT * from remark where sub_id='".$subid."' and status=1" ;
+						$query="SELECT * from remark where sub_id='".$subid."' and status=1 and sem";
 						// echo $query;
 						$result=mysqli_query($con,$query);
 						if(mysqli_num_rows($result)>0)
@@ -31,11 +31,11 @@
 							$rs=mysqli_query($con,$qry);
 							if($rs)
 							{
-								//header('location:fetch_report.php?err');
+								header('location:fetch_report.php?err');
 							}
 							else
 							{
-								//header('location:fetch_report.php?arr');
+								header('location:fetch_report.php?arr');
 							}
 						}
 		

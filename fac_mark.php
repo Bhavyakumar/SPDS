@@ -67,7 +67,7 @@ if(isset($_POST['submit']))
 							echo "<th></th>";
 						echo "</tr>";
 						echo "</thead>";
-				$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.reg_no=submission.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where sem_id='$sem' AND report_status=1 order by student.reg_no";
+				$sql="SELECT * FROM submission INNER JOIN student ON student.reg_no = submission.reg_no INNER JOIN title ON title.reg_no=submission.reg_no INNER JOIN minor_guide ON minor_guide.reg_no=submission.reg_no INNER JOIN major_guide ON major_guide.reg_no=submission.reg_no where title.sem_id='$sem' AND report_status=1 order by student.reg_no";
 			    // echo $sql;
 			    echo "<tbody>";
 				$rs= mysqli_query($con,$sql);
@@ -87,6 +87,7 @@ if(isset($_POST['submit']))
 						echo "<input type='hidden' class='form-control' value='".$row['reg_no']."' id='reg' name='reg'>";
 						echo "<input type='hidden' class='form-control' value='".$row['t_id']."' id='tid".$row['reg_no']."' name='tid'>";
 						echo "<input type='hidden' class='form-control' value='".$row['sub_id']."' id='sid".$row['reg_no']."' name='sid'>";
+						echo "<input type='hidden' class='form-control' value='".$row['sem_id']."' id='semid".$row['reg_no']."' name='semid'>";
 						echo "<td><input type='text' class='textbox form-control' name='proreport' id='proreport".$row['reg_no']."' placeholder='Marks' required></td>";
 						echo "<td><input type='text' class='textbox form-control' name='des_analysis' id='des_analysis".$row['reg_no']."' placeholder='Marks' required></td>";
 						echo "<td><input type='text' class='textbox form-control' name='code_valid' id='code_valid".$row['reg_no']."' placeholder='Marks' required></td>";
@@ -124,6 +125,7 @@ if(isset($_POST['submit']))
 			var reg=$(this).attr("data");
 			var tid=$("#tid"+reg).val();
 			var sid=$("#sid"+reg).val();
+			var semid=$("#semid"+reg).val();
 			var proj=$("#proreport"+reg).val();
 			var des_analysis=$("#des_analysis"+reg).val();
 			var code_valid=$("#code_valid"+reg).val();
@@ -139,6 +141,7 @@ if(isset($_POST['submit']))
                         reg:reg,
                         tid:tid,
                         sid:sid,
+                        semid:semid,
                         proj:proj,
                         des_analysis:des_analysis,
                         code_valid:code_valid,

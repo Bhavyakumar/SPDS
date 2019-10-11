@@ -1,7 +1,12 @@
 <?php
+session_start();
 	include 'connection.php';
 	if(isset($_POST['submit']))
   	{
+      $captcha=$_POST['captcha'];
+    $capses= $_SESSION["captcha_code"];
+    if ($captcha== $capses) 
+    {
       $suname=$_POST['suname'];
       $spwd=$_POST['spwd'];
       $cnt=0;
@@ -24,5 +29,10 @@
       if($cnt==0){
         header('location:studentlogin.php?arr');
       }
+    }
+    else
+    {
+      header('location:studentlogin.php?rr');
+    }
   }
 ?>

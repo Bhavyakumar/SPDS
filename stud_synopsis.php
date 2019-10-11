@@ -20,7 +20,7 @@
 				$tid=$rw['t_id'];
 				$sid=$rw['sem_id'];
 			}
-			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."'";
+			$query="SELECT * FROM remark where status=1 and sy_status=0 and reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 			$rem=mysqli_query($con,$query);
 			$count=mysqli_num_rows($rem);
 			$fet=mysqli_fetch_assoc($rem);
@@ -34,7 +34,7 @@
 			  		<span class="sr-only">unread messages</span>
 				   </button>';
 			}
-				$requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."'";
+				$requery="SELECT * FROM remark where status=1 and re_status=0 and reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 				$rerem=mysqli_query($con,$requery);
 				$hel=mysqli_num_rows($rerem);
 				$fetch=mysqli_fetch_assoc($rerem);
@@ -268,7 +268,7 @@
 		  //               		echo "</tr>";	
 		  //               }
 		  //       echo "</table>";
-		   	$qr="SELECT * FROM submission INNER JOIN title on title.t_id=submission.t_id where sy_status=0 and title.sem_id='".$_SESSION['semid']."'";
+		   	$qr="SELECT * FROM submission INNER JOIN title on title.t_id=submission.t_id where sy_status=0 and submission.sem_id='".$_SESSION['semid']."'";
 			$abc= mysqli_query($con,$qr);
 			if(mysqli_num_rows($abc))
 			{

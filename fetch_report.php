@@ -169,9 +169,9 @@ if($_SESSION['type']=='Minor')
 						<textarea class="form-control" id="majrem" name="majremark"></textarea required>
 
 						</div>
-						<input type="text" class="form-control" id="reg_no" name="regno" >
-						<input type="text" class="form-control" id="sub_id" name="subid">
-						<input type="text" class="form-control" id="s_id" name="sid">
+						<input type="hidden" class="form-control" id="reg_no" name="regno" >
+						<input type="hidden" class="form-control" id="sub_id" name="subid">
+						<input type="hidden" class="form-control" id="s_id" name="sid">
 
 					</div>
 
@@ -240,7 +240,7 @@ if($_SESSION['type']=='Major')
 						$original=$row['report_date'];
                     $newDate = date("d-m-Y", strtotime($original));
 					echo "<td><b>".$newDate."<b></td>";
-					$query="SELECT * FROM remark WHERE status=0 and reg_no='".$row['reg_no']."'";
+					$query="SELECT * FROM remark WHERE status=0 and reg_no='".$row['reg_no']."' and sem_id='".$sem."'";
 					// echo $query;
 					$re= mysqli_query($con,$query);
 					$rw=mysqli_fetch_assoc($re);
@@ -270,16 +270,20 @@ if($_SESSION['type']=='Major')
 
 ?>
 <script>
+
+
+	// alert('ji')
 $(".submitButtonremark").click(function(e){
 	var sub_id = $(this).attr("modalid");
 	var reg_no = $(this).attr("reg_no");
 	var smid = $(this).attr("smid");
+	// alert(smid);
 	console.log(e);
 	$.ajax({
                 url: "getreportRemark.php",
                 type: "GET",
                 data: {
-                    "reg":reg_no
+                    "reg":reg_no,
                    "smid":smid, 
 
                 },
@@ -300,17 +304,17 @@ $(".submitButtonremark").click(function(e){
 
 $(document).on("click",".Majorremark",function(e) {
 
-	var sub_id = $(this).attr("modalid");
+	var sub_id = $(this).attr("modalid"	);
 	var reg_no = $(this).attr("reg_no");
 	var seid = $(this).attr("semid");
-	alert(sub_id);
+	// alert("hi");
 	console.log(e);
 	$.ajax({
                 url: "getmaj_remark_report.php",
                 type: "GET",
                 data: {
                 	"seid":seid,
-                    "sid":reg_no,
+                    "reg":reg_no,
                 },
 
                 success: function(data) {
@@ -324,9 +328,10 @@ $(document).on("click",".Majorremark",function(e) {
             });
 	$('#sub_id').val(sub_id);
 	$('#reg_no').val(reg_no);
-	$('#s_id').val(sid);
+	$('#s_id').val(seid);
 });
 </script>
+
 <?php
  include 'webpage_footer.php';
 ?>

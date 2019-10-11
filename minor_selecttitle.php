@@ -1,7 +1,7 @@
 <?php
 	// print_r($_POST);
 include 'connection.php';
-		 require 'PHPMailer\phpmailer\PHPMailerAutoload.php';
+require 'PHPMailer\phpmailer\PHPMailerAutoload.php';
 
 	if(isset($_POST['accept']))
 	{
@@ -67,7 +67,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    // $mail->SMTPDebug = 0;                                       // Enable verbose debug output
+    // $mail->SMTPDebug = 4;                                       // Enable verbose debug output
     $mail->isSMTP();                                            // Set mailer to use SMTP
     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -75,7 +75,7 @@ try {
     $mail->Password   = 'LENOVOzukz1';                               // SMTP password
     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
     //$mail->Port       = 587;
-    $mailer->Port = '587';                                    // TCP port to connect to
+    $mail->Port = '587';                                    // TCP port to connect to
 
     //Recipients
     $mail->setFrom('bhavychaudhary5@gmail.com', 'Student Project Distribution System of CAIT');
@@ -100,11 +100,12 @@ try {
 		  		$maj="";
 			}
 		}
-		// $hid=$_POST['hidden'];
+// 		// $hid=$_POST['hidden'];
+		header("location:fetch_title.php?rr");
+
 	
 }
 // header_remove();
-header("location:fetch_title.php?err");
 //header( 'Location:http://localhost/project/fetch_title.php');
 exit;
 ?>

@@ -21,6 +21,11 @@
                           { 
                              echo"<div style='display:' id='login-alert' class='alert alert-danger col-sm-12'>Successfully Registered.</div>";
                           }
+                           if(isset($_GET['rr']))
+                          {
+                            echo"<div style='display:' id='login-alert' class='alert alert-danger col-sm-12'>Captcha is Invalid!  
+                            </div>"; 
+                          }
                    ?>         
                     <form action='facultylogin_suc.php' method='POST'>
                                     
@@ -37,6 +42,18 @@
                         </span>
                         <input type="password" class="form-control" id="fpwd" name="fpwd" placeholder="password" required>
                       </div>
+                       <div style="margin-top:10px" class="form-group">
+                        <!--Captcha-->        
+                        <div class="row">
+                            <div class="col-lg-6"> 
+                              <input type="text" name="captcha" class="form-control" placeholder="Captcha" id="captcha"class="demoInputBox" required>
+                            </div>
+                            <div class="col-lg-6"> 
+                              <img id="captcha_code" src="capcha.php" />
+                              &nbsp;&nbsp;&nbsp;<a href="#" id="Refresh" style="font-size: 150%;"><span class="glyphicon glyphicon-refresh spin"></span></a>
+                            </div>
+                        </div>
+                      </div> 
 
                       <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
@@ -57,7 +74,12 @@
                </div>                     
     </div>  
 
+<script>
+ $('#Refresh').click(function (){
+    $("#captcha_code").attr('src','capcha.php');
+ });
  
+</script>  
 <?php
     include 'webpage_footer.php';
 ?>

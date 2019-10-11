@@ -24,7 +24,7 @@ session_start();
 						}
 						else
 						{
-							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id,status,sem_id) values ('$reg','$fid','$remark','$subid',1,'$sid')";
+							$qry= "insert into remark (reg_no,f_id,sy_remark,sub_id,status,sy_status,sem_id) values ('$reg','$fid','$remark','$subid',1,0,'$sid')";
 							echo "$qry";
 							$rs=mysqli_query($con,$qry);
 							if($rs)

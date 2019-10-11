@@ -2,12 +2,12 @@
 <?php
 	include 'webpage_header.php';
 	include 'connection.php';
-	$qry= "select * from result where reg_no='".$_SESSION['reg']."'";
+	$qry= "select * from result where reg_no='".$_SESSION['reg']."' and sem_id='".$_SESSION['semid']."'";
 	$result=mysqli_query($con,$qry);
 	if(mysqli_num_rows($result)>0)
 	{
-			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
-			// echo $sql;
+			$sql="SELECT AVG(total),result.sem_id,result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."' and result.sem_id='".$_SESSION['semid']."'";
+			 // echo $sql;
 			$rs=mysqli_query($con,$sql);
 			echo "<div id='printTable' >";
 			echo "<table align='center'>";
@@ -74,7 +74,7 @@
 				echo "</tr>";
 			}
 			echo "</table>";
-			$qry="SELECT * FROM result INNER JOIN title ON title.t_id=result.t_id WHERE result.reg_no='".$_SESSION['reg']."' group by result.reg_no";
+			$qry="SELECT * FROM result INNER JOIN title ON title.t_id=result.t_id WHERE result.reg_no='".$_SESSION['reg']."' and result.sem_id='".$_SESSION['semid']."' group by result.reg_no";
 			// echo $qry;
 			$result=mysqli_query($con,$qry);
 			echo "<br></br>";
@@ -97,7 +97,7 @@
 				echo "</tr>";
 			}
 			echo "</table>";
-			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."'";
+			$sql="SELECT AVG(total),result.reg_no,name,roll_no,email,semester FROM result INNER JOIN student ON student.reg_no=result.reg_no INNER JOIN semester ON semester.sem_id=student.sem_id WHERE result.reg_no='".$_SESSION['reg']."' and result.sem_id='".$_SESSION['semid']."'";
 			// echo $sql;
 			$rs=mysqli_query($con,$sql);
 

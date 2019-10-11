@@ -43,7 +43,7 @@
         <!--Captcha-->        
         <div class="row">
             <div class="col-lg-6"> 
-              <input type="text" name="captcha" class="form-control" placeholder="Captcha" id="captcha"class="demoInputBox">
+              <input type="text" name="captcha" class="form-control" placeholder="Captcha" id="captcha"class="demoInputBox" required>
             </div>
             <div class="col-lg-6"> 
               <img id="captcha_code" src="capcha.php" />

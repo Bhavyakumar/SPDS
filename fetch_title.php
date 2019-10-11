@@ -87,12 +87,12 @@ if($_SESSION['type']=='Minor')
 					{
 						if($row['t_status']=='1')
 						{
-							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."<img src='image/select.gif' style='width:40px;'></td>";
+							echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."<img src='image/select.gif' style='width:40px;'></td>";
 							
 						}
 						else
 						{
-							echo "<td><input type='checkbox' name='maj_title".$i."' id='maj_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
+							echo "<td><input type='checkbox' name='min_title".$i."' id='min_title' class='form-check-input'  value='".$row['t_id']."'>".$row['title']."</td>";
 						}
 					}
 					// else
@@ -108,6 +108,7 @@ if($_SESSION['type']=='Minor')
 			echo "<input  type='submit' id='submit' name='accept' class='btn btn-primary' value='Send to Major Guide'><br>";	
 
 		}
+		echo "</form>";
 	echo "</div>";
 }
 if($_SESSION['type']=='Major')
@@ -182,6 +183,7 @@ if($_SESSION['type']=='Major')
 			echo "</table>";
 			echo "<div><input  type='submit' id='send' name='send' class='btn btn-primary' value='Send to Student'></div>";	
 		}
+			echo "</form>";
 		echo "</div>";
 	}
   include 'webpage_footer.php';

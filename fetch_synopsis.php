@@ -245,7 +245,7 @@ if($_SESSION['type']=='Major')
 					$original=$row['synopsis_date'];
                     $newDate = date("d-m-Y", strtotime($original));
 					echo "<td><b>".$newDate."<b></td>";
-					$query="SELECT * FROM remark WHERE status=0 and reg_no='".$row['reg_no']."'";
+					$query="SELECT * FROM remark WHERE status=0 and reg_no='".$row['reg_no']."' and sem_id='".$sem."'";
 					// echo $query;
 					$re= mysqli_query($con,$query);
 					$rw=mysqli_fetch_assoc($re);
