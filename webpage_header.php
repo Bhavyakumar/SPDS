@@ -15,6 +15,7 @@
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
 
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
   <!-- <script>
     $(document).ready(function(){
       $('#submit').on('click',function(){
@@ -23,7 +24,27 @@
 
     });
   </script> -->
+   <!-- <script type="text/javascript">
+    $(window).load(function() {
+      $(".loader").fadeOut("slow");
+    });
+  </script>
+   <script type="text/javascript">
+    $(window).load(function() {
+      $(".loader").fadeOut("slow");
+    });
+  </script>
+ -->
   <style>
+     .loader { /*/*position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('image/LoaderIcon.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8*/;
+    }
     /* Set height of the grid so   .sidenav can be 100% (adjust if needed) */
     
     /* Set gray background color and 100% height */
@@ -78,7 +99,7 @@
   </script>
 </head>
 <body>
-
+  <!-- <div class="loader"></div> -->
 <div class="container-fluid">
 <div class="row content"> 
 

@@ -14,7 +14,7 @@
   <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
    <!-- <script src="cookie.jquery.json"></script> -->
   <script src="css/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <!-- <script>
     $(document).ready(function(){
       $('#submit').on('click',function(){
@@ -23,7 +23,28 @@
 
     });
   </script> -->
+  <script type="text/javascript">
+    $(window).load(function() {
+      $(".loader").fadeOut("slow");
+    });
+  </script>
+   <script type="text/javascript">
+    $(window).load(function() {
+      $(".loader").fadeOut("slow");
+    });
+  </script>
+
   <style>
+    .loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('image/LoaderIcon.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+    }
     /* Set height of the grid so   .sidenav can be 100% (adjust if needed) */
     
     /* Set gray background color and 100% height */
@@ -98,10 +119,12 @@
   background-color: #077315;
 }
 </style>
-
+<?php
+session_start();
+?>
 </head>
 <body>
-
+  <div class="loader"></div>
 <div class="container-fluid">
 <div class="row content"> 
 <button onclick="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
@@ -113,7 +136,7 @@
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#section1">Dashboard</a></li>
             <?php
-             session_start();
+             
                   if(isset($_SESSION['type']))
                   {
                      echo "<li><a href='fac_mark.php'>Mark</a></li>";
@@ -299,7 +322,7 @@
    <img src="image/CAIT.jpg" class="img-circle" alt="Cinque Terre" width="280" height="200">
  </div>
    <div class="col-lg-4 mb-4">
-    <img src="image/logo.jpg" class="img-rounded" alt="Cinque Terre" width="280" height="200">
+    <img src="image/aau.jpg" class="img-rounded" alt="Cinque Terre" width="280" height="200">
   </div>
    </div><br>
       <!-- <img src="image/cait.jpg" style="margin-left:50px;width:110%;"> -->
